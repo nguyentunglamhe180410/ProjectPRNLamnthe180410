@@ -1,0 +1,74 @@
+﻿@model List<LightNovel>
+@{
+    ViewData["Title"] = "Manage Light Novels";
+    Layout = "_Layout";
+}
+
+<section class="product spad">
+    <div class="container">
+        <h2>Manage Light Novels</h2>
+        <a href="@Url.Action("Create")" class="btn btn-primary mb-3">Add New Light Novel</a>
+        <table class="table" id="lightNovelTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Episodes</th>
+                    <th>Cost</th>
+                    <th>Genre</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ln in Model)
+                {
+                    <tr data-id="@ln.Id">
+                        <td>@ln.Title</td>
+                        <td>@ln.Episodes</td>
+                        <td>@ln.Cost</td>
+                        <td>@(ln.Genre?.Name ?? "Unknown")</td>
+                        <td>
+                            <a href="@Url.Action("Edit", new { id = ln.Id })" class="btn btn-warning">Edit</a>
+                            <a href="@Url.Action("Delete", new { id = ln.Id })" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="mt-4">
+            <h4>Real-Time Updates</h4>
+            <ul id="updateList" class="list-group"></ul>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/lightNovelHub")
+            .build();
+
+        connection.on("ReceiveUpdate", (message) => {
+            // Log the update
+            const li = document.createElement("li");
+            li.textContent = message;
+            li.className = "list-group-item";
+            document.getElementById("updateList").prepend(li);
+
+            // Refresh the table by fetching updated data
+            fetch('/Admin/LightNovel/Index')
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newTable = doc.querySelector('#lightNovelTable');
+                    document.querySelector('#lightNovelTable').outerHTML = newTable.outerHTML;
+                })
+                .catch(err => console.error('Error refreshing table:', err));
+        });
+
+        connection.start().catch(err => console.error(err));
+    </script>
+}

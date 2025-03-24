@@ -1,0 +1,809 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ProjectPRNLamnthe180410.bundle.scp.css",
+      "PackagePath": "staticwebassets\\ProjectPRNLamnthe180410.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\css\\elegant-icons.css",
+      "PackagePath": "staticwebassets\\css\\elegant-icons.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\css\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\css\\font-awesome.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\css\\nice-select.css",
+      "PackagePath": "staticwebassets\\css\\nice-select.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\css\\owl.carousel.min.css",
+      "PackagePath": "staticwebassets\\css\\owl.carousel.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\css\\plyr.css",
+      "PackagePath": "staticwebassets\\css\\plyr.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\css\\slicknav.min.css",
+      "PackagePath": "staticwebassets\\css\\slicknav.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\fonts\\ElegantIcons.eot",
+      "PackagePath": "staticwebassets\\fonts\\ElegantIcons.eot"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\fonts\\ElegantIcons.svg",
+      "PackagePath": "staticwebassets\\fonts\\ElegantIcons.svg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\fonts\\ElegantIcons.ttf",
+      "PackagePath": "staticwebassets\\fonts\\ElegantIcons.ttf"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\fonts\\ElegantIcons.woff",
+      "PackagePath": "staticwebassets\\fonts\\ElegantIcons.woff"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\fonts\\FontAwesome.otf",
+      "PackagePath": "staticwebassets\\fonts\\FontAwesome.otf"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\fonts\\fontawesome-webfont.eot",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.eot"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\fonts\\fontawesome-webfont.svg",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.svg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\fonts\\fontawesome-webfont.ttf",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.ttf"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\fonts\\fontawesome-webfont.woff",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.woff"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\fonts\\fontawesome-webfont.woff2",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.woff2"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\10916.jpg",
+      "PackagePath": "staticwebassets\\images\\10916.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\11213.jpg",
+      "PackagePath": "staticwebassets\\images\\11213.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\13776.jpg",
+      "PackagePath": "staticwebassets\\images\\13776.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\14045.jpg",
+      "PackagePath": "staticwebassets\\images\\14045.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\14378.jpg",
+      "PackagePath": "staticwebassets\\images\\14378.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\15653.jpg",
+      "PackagePath": "staticwebassets\\images\\15653.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\1718.jpg",
+      "PackagePath": "staticwebassets\\images\\1718.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\17858.jpg",
+      "PackagePath": "staticwebassets\\images\\17858.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\18506.jpg",
+      "PackagePath": "staticwebassets\\images\\18506.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\19048.jpg",
+      "PackagePath": "staticwebassets\\images\\19048.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\19457.jpg",
+      "PackagePath": "staticwebassets\\images\\19457.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\20111.jpg",
+      "PackagePath": "staticwebassets\\images\\20111.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\20271.jpg",
+      "PackagePath": "staticwebassets\\images\\20271.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\21291.jpg",
+      "PackagePath": "staticwebassets\\images\\21291.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\2134.jpg",
+      "PackagePath": "staticwebassets\\images\\2134.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\22088.jpg",
+      "PackagePath": "staticwebassets\\images\\22088.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\22814.jpg",
+      "PackagePath": "staticwebassets\\images\\22814.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\23119.jpg",
+      "PackagePath": "staticwebassets\\images\\23119.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\23338.jpg",
+      "PackagePath": "staticwebassets\\images\\23338.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\27325.jpg",
+      "PackagePath": "staticwebassets\\images\\27325.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\27894.jpg",
+      "PackagePath": "staticwebassets\\images\\27894.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\28197.jpg",
+      "PackagePath": "staticwebassets\\images\\28197.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\28254.jpg",
+      "PackagePath": "staticwebassets\\images\\28254.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\28897.jpg",
+      "PackagePath": "staticwebassets\\images\\28897.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\3028.jpg",
+      "PackagePath": "staticwebassets\\images\\3028.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\30719.jpg",
+      "PackagePath": "staticwebassets\\images\\30719.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\31287.jpg",
+      "PackagePath": "staticwebassets\\images\\31287.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\33219.jpg",
+      "PackagePath": "staticwebassets\\images\\33219.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\3527.jpg",
+      "PackagePath": "staticwebassets\\images\\3527.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\35451.jpg",
+      "PackagePath": "staticwebassets\\images\\35451.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\35953.jpg",
+      "PackagePath": "staticwebassets\\images\\35953.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\40907.jpg",
+      "PackagePath": "staticwebassets\\images\\40907.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\41617.jpg",
+      "PackagePath": "staticwebassets\\images\\41617.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\41635.jpg",
+      "PackagePath": "staticwebassets\\images\\41635.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\4265.jpg",
+      "PackagePath": "staticwebassets\\images\\4265.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\43343.jpg",
+      "PackagePath": "staticwebassets\\images\\43343.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\45244.jpg",
+      "PackagePath": "staticwebassets\\images\\45244.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\4602.jpg",
+      "PackagePath": "staticwebassets\\images\\4602.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\46855.jpg",
+      "PackagePath": "staticwebassets\\images\\46855.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\51637.jpg",
+      "PackagePath": "staticwebassets\\images\\51637.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\52845.jpg",
+      "PackagePath": "staticwebassets\\images\\52845.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\5429.jpg",
+      "PackagePath": "staticwebassets\\images\\5429.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\54833.jpg",
+      "PackagePath": "staticwebassets\\images\\54833.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\55889.jpg",
+      "PackagePath": "staticwebassets\\images\\55889.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\56005.jpg",
+      "PackagePath": "staticwebassets\\images\\56005.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\57187.jpg",
+      "PackagePath": "staticwebassets\\images\\57187.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\59885.jpg",
+      "PackagePath": "staticwebassets\\images\\59885.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\61291.jpg",
+      "PackagePath": "staticwebassets\\images\\61291.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\62221.jpg",
+      "PackagePath": "staticwebassets\\images\\62221.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\62655.jpg",
+      "PackagePath": "staticwebassets\\images\\62655.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\63207.jpg",
+      "PackagePath": "staticwebassets\\images\\63207.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\63539.jpg",
+      "PackagePath": "staticwebassets\\images\\63539.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\64095.jpg",
+      "PackagePath": "staticwebassets\\images\\64095.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\64191.jpg",
+      "PackagePath": "staticwebassets\\images\\64191.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\64257.jpg",
+      "PackagePath": "staticwebassets\\images\\64257.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\64881.jpg",
+      "PackagePath": "staticwebassets\\images\\64881.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\67771.jpg",
+      "PackagePath": "staticwebassets\\images\\67771.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\68933.jpg",
+      "PackagePath": "staticwebassets\\images\\68933.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\70285.jpg",
+      "PackagePath": "staticwebassets\\images\\70285.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\70663.jpg",
+      "PackagePath": "staticwebassets\\images\\70663.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\71645.jpg",
+      "PackagePath": "staticwebassets\\images\\71645.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\71928.jpg",
+      "PackagePath": "staticwebassets\\images\\71928.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\72146.jpg",
+      "PackagePath": "staticwebassets\\images\\72146.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\72689.jpg",
+      "PackagePath": "staticwebassets\\images\\72689.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\74184.jpg",
+      "PackagePath": "staticwebassets\\images\\74184.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\74736.jpg",
+      "PackagePath": "staticwebassets\\images\\74736.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\75298.jpg",
+      "PackagePath": "staticwebassets\\images\\75298.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\75940.jpg",
+      "PackagePath": "staticwebassets\\images\\75940.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\75949.jpg",
+      "PackagePath": "staticwebassets\\images\\75949.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\76011.jpg",
+      "PackagePath": "staticwebassets\\images\\76011.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\76333.jpg",
+      "PackagePath": "staticwebassets\\images\\76333.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\76581.jpg",
+      "PackagePath": "staticwebassets\\images\\76581.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\76976.jpg",
+      "PackagePath": "staticwebassets\\images\\76976.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\77968.jpg",
+      "PackagePath": "staticwebassets\\images\\77968.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\79352.jpg",
+      "PackagePath": "staticwebassets\\images\\79352.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\79394.jpg",
+      "PackagePath": "staticwebassets\\images\\79394.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\79701.jpg",
+      "PackagePath": "staticwebassets\\images\\79701.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\79832.jpg",
+      "PackagePath": "staticwebassets\\images\\79832.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\81033.jpg",
+      "PackagePath": "staticwebassets\\images\\81033.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\81589.jpg",
+      "PackagePath": "staticwebassets\\images\\81589.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\82050.jpg",
+      "PackagePath": "staticwebassets\\images\\82050.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\82804.jpg",
+      "PackagePath": "staticwebassets\\images\\82804.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\82902.jpg",
+      "PackagePath": "staticwebassets\\images\\82902.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\82963.jpg",
+      "PackagePath": "staticwebassets\\images\\82963.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\83439.jpg",
+      "PackagePath": "staticwebassets\\images\\83439.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\83602.jpg",
+      "PackagePath": "staticwebassets\\images\\83602.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\83820.jpg",
+      "PackagePath": "staticwebassets\\images\\83820.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\84267.jpg",
+      "PackagePath": "staticwebassets\\images\\84267.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\86116.jpg",
+      "PackagePath": "staticwebassets\\images\\86116.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\86450.jpg",
+      "PackagePath": "staticwebassets\\images\\86450.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\86521.jpg",
+      "PackagePath": "staticwebassets\\images\\86521.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\87134.jpg",
+      "PackagePath": "staticwebassets\\images\\87134.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\87200.jpg",
+      "PackagePath": "staticwebassets\\images\\87200.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\87216.jpg",
+      "PackagePath": "staticwebassets\\images\\87216.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\87826.jpg",
+      "PackagePath": "staticwebassets\\images\\87826.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\88390.jpg",
+      "PackagePath": "staticwebassets\\images\\88390.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\88494.jpg",
+      "PackagePath": "staticwebassets\\images\\88494.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\88729.jpg",
+      "PackagePath": "staticwebassets\\images\\88729.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\89672.jpg",
+      "PackagePath": "staticwebassets\\images\\89672.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\89692.jpg",
+      "PackagePath": "staticwebassets\\images\\89692.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\89877.jpg",
+      "PackagePath": "staticwebassets\\images\\89877.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\90001.jpg",
+      "PackagePath": "staticwebassets\\images\\90001.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\90996.jpg",
+      "PackagePath": "staticwebassets\\images\\90996.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\91012.jpg",
+      "PackagePath": "staticwebassets\\images\\91012.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\91037.jpg",
+      "PackagePath": "staticwebassets\\images\\91037.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\91247.jpg",
+      "PackagePath": "staticwebassets\\images\\91247.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\91940.jpg",
+      "PackagePath": "staticwebassets\\images\\91940.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\9521.jpg",
+      "PackagePath": "staticwebassets\\images\\9521.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\images\\errorimage.jpg",
+      "PackagePath": "staticwebassets\\images\\errorimage.jpg"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\js\\jquery-3.3.1.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery-3.3.1.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\js\\jquery.nice-select.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.nice-select.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\js\\jquery.slicknav.js",
+      "PackagePath": "staticwebassets\\js\\jquery.slicknav.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\js\\mixitup.min.js",
+      "PackagePath": "staticwebassets\\js\\mixitup.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\js\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\js\\owl.carousel.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\js\\player.js",
+      "PackagePath": "staticwebassets\\js\\player.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\js\\signalr-lightnovel.js",
+      "PackagePath": "staticwebassets\\js\\signalr-lightnovel.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\Tai lieu hoc tap\\FPT\\PRN212\\Code\\ProjectPRNLamnthe180410\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ProjectPRNLamnthe180410.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ProjectPRNLamnthe180410.props",
+      "PackagePath": "build\\ProjectPRNLamnthe180410.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ProjectPRNLamnthe180410.props",
+      "PackagePath": "buildMultiTargeting\\ProjectPRNLamnthe180410.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ProjectPRNLamnthe180410.props",
+      "PackagePath": "buildTransitive\\ProjectPRNLamnthe180410.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

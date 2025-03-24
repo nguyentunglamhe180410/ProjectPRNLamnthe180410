@@ -1,0 +1,17 @@
+﻿@model Genre
+@{
+    ViewData["Title"] = "Delete Genre";
+    Layout = "_Layout";
+}
+
+<section class="product spad">
+    <div class="container">
+        <h2>Delete Genre</h2>
+        <p>Are you sure you want to delete "@Model.Name"?</p>
+        <form asp-action="DeleteConfirmed" method="post">
+            <input asp-for="Id" type="hidden" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</section>

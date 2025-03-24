@@ -1,0 +1,251 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "_Layout";
+    var lightNovel = ViewData["LightNovel"] as LightNovel;
+    var genre = ViewData["Genre"] as Genre;
+    var user = ViewData["User"] as User;
+    bool hasBought = ViewData["HasBought"] as bool? ?? false;
+    var comments = ViewData["Comments"] as List<Comment>;
+}
+
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+<link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+
+
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Anime Section Begin -->
+    <section class="anime-details spad">
+        <div class="container">
+            <div class="anime__details__content">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="anime__details__pic set-bg" data-setbg="@lightNovel.ImgUrl">
+                            <div class="view"><i class="fa fa-eye"></i> @lightNovel.Read</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="anime__details__text">
+                            <div class="anime__details__title">
+                                <h3>@lightNovel.Title</h3>
+                            </div>
+                            <p>@lightNovel.Description</p>
+                            <div class="anime__details__widget">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <ul>
+                                            <li><span>Episode:</span> @lightNovel.Episodes</li>
+                                            <li><span>Date aired:</span> @(lightNovel.Aired?.ToString("MMM dd, yyyy") ?? "Unknown")</li>
+                                            <li><span>Genre:</span> @genre.Name</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <ul>
+                                            <li><span>Scores:</span> @lightNovel.Score</li>
+                                            <li><span>Rank:</span> @lightNovel.Ranked</li>
+                                            <li><span>Status:</span> @lightNovel.Status</li>
+                                            <li><span>Views:</span> @lightNovel.Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="anime__details__btn">
+                                @if (hasBought)
+                                {
+                                    <button class="btn btn-success" disabled>Already Purchased</button>
+                                }
+                                else
+                                {
+                                    <a href="/Purchase/Buy/@lightNovel.Id" class="btn btn-primary">Buy Now for 200🪙</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <div class="anime__details__review">
+                        <div class="section-title">
+                            <h5>Comments</h5>
+                        </div>
+
+
+
+
+                        <div id="commentSection">
+                            @if (comments!= null)
+                            {
+                                @foreach (var comment in comments)
+                                {
+                                    <div class="anime__review__item">
+                                        <div class="anime__review__item__pic">
+                                            <img src="img/anime/review-6.jpg" alt="User Profile">
+                                        </div>
+                                        <div class="anime__review__item__text">
+                                            <h6>
+                                                @comment.User.Username -
+                                                <span class="timeago" data-timestamp="@comment.CreateAt?.ToString("o")">
+                                                    @comment.CreateAt?.ToString("MMM dd, yyyy HH:mm")
+                                                </span>
+                                            </h6>
+                                            <p>@comment.Content</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p id="noComments">No comments yet. Be the first to comment!</p>
+                            }
+                        </div>
+                    </div>
+                    @if (user != null)
+                    {
+                        <div class="anime__details__form">
+                            <div class="section-title">
+                                <h5>Your Comment</h5>
+                            </div>
+                        <form id="comment-form" method="post" asp-action="AddComment">
+                            <input type="hidden" name="lightNovelId" value="@lightNovel.Id" />
+                            <textarea name="content" id="comment-content" placeholder="Your Comment"></textarea>
+                            <button type="submit"><i class="fa fa-location-arrow"></i> Post</button>
+                        </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="alert alert-warning">You must log in to comment.</p>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Anime Section End -->
+    <!-- Js Plugins -->
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+<script>
+    // SignalR connection
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/lightNovelHub")
+        .build();
+
+    connection.start().catch(err => console.error(err));
+
+    // Update comment timestamps dynamically
+    function updateTimeAgo() {
+        const elements = document.querySelectorAll('.timeago');
+        if (elements.length === 0) {
+            console.warn("No .timeago elements found in the DOM");
+            return;
+        }
+        elements.forEach(element => {
+            const timestamp = element.getAttribute('data-timestamp');
+            if (!timestamp) {
+                element.innerText = "No timestamp";
+                return;
+            }
+            const date = new Date(timestamp);
+            if (isNaN(date.getTime())) {
+                element.innerText = "Invalid date";
+                console.error(`Invalid timestamp: ${timestamp}`);
+                return;
+            }
+            const timeAgo = getTimeAgo(date);
+            element.innerText = timeAgo;
+        });
+    }
+
+    function getTimeAgo(date) {
+        const now = new Date();
+        const seconds = Math.floor((now - date) / 1000);
+
+        if (seconds < 0) return "In the future"; // Handle future dates
+        if (seconds < 10) return "Just now";
+        if (seconds < 60) return `${seconds} second${seconds === 1 ? "" : "s"} ago`;
+
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 60) return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+
+        const days = Math.floor(hours / 24);
+        if (days < 7) return `${days} day${days === 1 ? "" : "s"} ago`;
+
+        // More precise fallback for older dates
+        return date.toLocaleString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+
+    // Run only when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        updateTimeAgo(); // Initial call
+        setInterval(updateTimeAgo, 5000); // Update every 5 seconds
+    });
+
+    connection.on("ReceiveUpdate", (lightNovelId, username, content, createdAt) => {
+        const commentSection = document.getElementById("commentSection");
+        const noCommentsMessage = document.getElementById("noComments");
+
+        if (noCommentsMessage) {
+            noCommentsMessage.remove();
+        }
+
+        const commentHtml = `
+                <div class="anime__review__item">
+                <div class="anime__review__item__pic">
+                    <img src="img/anime/review-6.jpg" alt="User Profile">
+                </div>
+                <div class="anime__review__item__text">
+                    <h6>${username} -
+                        <span class="timeago" data-timestamp="${createdAt}">
+                            Just now
+                        </span>
+                    </h6>
+                    <p>${content}</p>
+                </div>
+            </div>
+        `;
+        commentSection.insertAdjacentHTML("afterbegin", commentHtml);
+        updateTimeAgo();
+    });
+
+   
+
+</script>

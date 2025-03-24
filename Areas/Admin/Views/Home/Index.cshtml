@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "_Layout";
+}
+
+<section class="product spad">
+    <div class="container">
+        <h2>Admin Dashboard</h2>
+        <p>Welcome, Admin! This is your control panel.</p>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <a href="@Url.Action("Index", "LightNovel", new { area = "Admin" })" class="btn btn-primary btn-block">Manage Light Novels</a>
+            </div>
+            <div class="col-md-4">
+                <a href="@Url.Action("Index", "Genre", new { area = "Admin" })" class="btn btn-primary btn-block">Manage Genres</a>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "User Profile";
+    Layout = "_Layout";
+    var user = ViewData["User"] as User;
+}
+
+<meta charset="UTF-8">
+<meta name="description" content="Anime Template">
+<meta name="keywords" content="Anime, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Anime | Template</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+<link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+<section class="product spad">
+    <div class="container">
+        <h2>User Profile</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="card">
+                    <img src="@(user.ProfilePicture ?? "/img/default-profile.png")" class="card-img-top" alt="Profile Picture" style="max-height: 300px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@Model.Username</h5>
+                        <a href="@Url.Action("Edit")" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Details</h5>
+                        <dl class="row">
+                            <dt class="col-sm-3">Username</dt>
+                            <dd class="col-sm-9">@user.Username</dd>
+
+                            <dt class="col-sm-3">Password</dt>
+                            <dd class="col-sm-9">********</dd>
+
+                            <dt class="col-sm-3">Coins</dt>
+                            <dd class="col-sm-9">@(user.Coins.HasValue ? Model.Coins.Value.ToString() : "0")</dd>
+
+                            <dt class="col-sm-3">Status</dt>
+                            <dd class="col-sm-9">@(user.Status ? "Normal" : "Inactive")</dd>
+
+                            <dt class="col-sm-3">Description</dt>
+                            <dd class="col-sm-9">@(user.Description ?? "No description provided.")</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <h4>Real-Time Updates</h4>
+            <ul id="updateList" class="list-group"></ul>
+        </div>
+    </div>
+</section>
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/player.js"></script>
+<script src="~/js/jquery.nice-select.min.js"></script>
+<script src="~/js/mixitup.min.js"></script>
+<script src="~/js/jquery.slicknav.js"></script>
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="~/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/lightNovelHub")
+        .build();
+
+    connection.on("ReceiveUpdate", (message) => {
+        const li = document.createElement("li");
+        li.textContent = message;
+        li.className = "list-group-item";
+        document.getElementById("updateList").prepend(li);
+
+        // Optional: Refresh profile data if it's the current user's update
+        if (message.includes("@user.Username")) {
+            fetch('/UserProfile/Index')
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newContent = doc.querySelector('.container');
+                    document.querySelector('.container').outerHTML = newContent.outerHTML;
+                })
+                .catch(err => console.error('Error refreshing profile:', err));
+        }
+    });
+
+    connection.start().catch(err => console.error(err));
+</script>

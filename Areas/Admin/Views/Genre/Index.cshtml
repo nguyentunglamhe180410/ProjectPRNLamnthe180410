@@ -1,0 +1,68 @@
+﻿@model List<Genre>
+@{
+    ViewData["Title"] = "Manage Genres";
+    Layout = "_Layout";
+}
+
+<section class="product spad">
+    <div class="container">
+        <h2>Manage Genres</h2>
+        <a href="@Url.Action("Create")" class="btn btn-primary mb-3">Add New Genre</a>
+        <table class="table" id="genreTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var genre in Model)
+                {
+                    <tr data-id="@genre.Id">
+                        <td>@genre.Name</td>
+                        <td>
+                            <a href="@Url.Action("Edit", new { id = genre.Id })" class="btn btn-warning">Edit</a>
+                            <a href="@Url.Action("Delete", new { id = genre.Id })" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="mt-4">
+            <h4>Real-Time Updates</h4>
+            <ul id="updateList" class="list-group"></ul>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/lightNovelHub")
+            .build();
+
+        connection.on("ReceiveUpdate", (message) => {
+            // Log the update
+            const li = document.createElement("li");
+            li.textContent = message;
+            li.className = "list-group-item";
+            document.getElementById("updateList").prepend(li);
+
+            // Refresh the table by fetching updated data
+            fetch('/Admin/Genre/Index')
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newTable = doc.querySelector('#genreTable');
+                    document.querySelector('#genreTable').outerHTML = newTable.outerHTML;
+                })
+                .catch(err => console.error('Error refreshing table:', err));
+        });
+
+        connection.start().catch(err => console.error(err));
+    </script>
+}

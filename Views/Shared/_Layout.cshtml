@@ -1,0 +1,152 @@
+﻿@using System.Text.Json
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using ProjectPRNLamnthe180410.Models
+@{
+    var userName = HttpContextAccessor.HttpContext?.Session.GetString("UserName");
+    var userID = HttpContextAccessor.HttpContext?.Session.GetInt32("UserID");
+    bool isLoggedIn = !string.IsNullOrEmpty(userName);
+    var categoriesJson = Context.Session.GetString("Categories");
+    var categories = categoriesJson != null
+        ? JsonSerializer.Deserialize<List<Genre>>(categoriesJson)
+        : new List<Genre>();
+
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProjectPRNLamnthe180410</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProjectPRNLamnthe180410.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="fixed-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="/">
+                            <img src="~/img/logo.png" alt="Logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a asp-controller="Home" asp-action="Index">Homepage</a></li>
+                                <li>
+                                    <a href="#">Categories <span class="arrow_carrot-down"></span></a>
+                                    <ul class="dropdown">
+                                        @foreach (var category in categories)
+                                        {
+                                            <li>
+                                                <a asp-controller="Category" asp-action="Index" asp-route-id="@category.Id">
+                                                    @category.Name
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                                
+                                <li><a asp-controller="Search" asp-action="Index">Search</a></li>
+                                <li><a asp-controller="Home" asp-action="Contact">Contacts</a></li>
+                                <li>
+                                    <a id="userLink" href="@(!isLoggedIn ? "/Login" : "javascript:void(0);")">
+                                        @(isLoggedIn ? userName : "Login") <span class="arrow_carrot-down"></span>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <span id="authLinks" style="@(isLoggedIn ? "display:block;" : "display:none;")">
+                                        <li><a asp-controller="Profile" asp-action="Index">Profile</a></li>
+                                        <li><a asp-controller="" asp-action="Details">Buy Coins</a></li>
+                                        <li id="logoutLink"><a asp-controller="Login" asp-action="Logout">Logout</a></li>
+                                        </span>
+                                        <span id="guestLinks" style="@(isLoggedIn ? "display:none;" : "display:block;")">
+                                        <li id="registerLink"><a asp-controller="Login" asp-action="Register">Sign Up</a></li>
+                                        <li id="loginLink"><a asp-controller="Login">Login</a></li>
+                                        </span>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @* <footer class="border-top footer text-muted">
+        <div class="page-up">
+            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="footer__nav">
+                        <ul>
+                            <li class="active"><a href="/Home">Homepage</a></li>
+                            <li><a href="./categories.html">Categories</a></li>
+                            <li><a href="./blog.html">Our Blog</a></li>
+                            <li><a href="#">Contacts</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+    </footer> *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/lightNovelHub") // Your SignalR hub
+        .build();
+
+    connection.start().catch(err => console.error(err));
+
+    connection.on("ReceiveUpdate", (username, isLoggedIn) => {
+        console.log(`${username} update received. Logged in: ${isLoggedIn}`);
+
+        const userLink = document.getElementById("userLink");
+        const authLinks = document.getElementById("authLinks");
+        const guestLinks = document.getElementById("guestLinks");
+
+        if (isLoggedIn) {
+            userLink.innerHTML = username + ' <span class="arrow_carrot-down"></span>';
+            userLink.removeAttribute("href");
+            authLinks.style.display = "block";  // Show Profile & Buy Coins
+            guestLinks.style.display = "none";  // Hide Login & Register
+        } else {
+            userLink.innerHTML = 'Login <span class="arrow_carrot-down"></span>';
+            userLink.setAttribute("href", "/Login");
+            authLinks.style.display = "none";   // Hide Profile & Buy Coins
+            guestLinks.style.display = "block"; // Show Login & Register
+        }
+    });
+</script>
+

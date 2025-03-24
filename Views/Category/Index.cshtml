@@ -1,0 +1,167 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Category";
+    Layout = "_Layout";
+}
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime | Template</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Css Styles -->
+<link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/font-awesome.min.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/elegant-icons.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/owl.carousel.min.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/slicknav.min.css" asp-append-version="true">
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+    <!-- Product Section Begin -->
+    <section class="product-page spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="product__page__content">
+                        <div class="product__page__title">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-6">
+                                    <div class="section-title">
+                                        <h4>@ViewData["GenreName"]</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="lightNovelList">
+                            @foreach (var novel in ViewData["LightNovels"] as IEnumerable<LightNovel>)
+                            {
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="product__item">
+                                        <div class="product__item__pic set-bg" data-setbg="~/images/@novel.ImgUrl">
+                                            <div class="ep">@novel.Episodes Episodes</div>
+                                            <div class="comment"><i class="fa"></i> @novel.Cost🪙</div>
+                                            <div class="view"><i class="fa fa-eye"></i> @novel.Read</div>
+                                        </div>
+                                        <div class="product__item__text">
+                                            <ul>
+                                                <li> Rank @novel.Ranked</li>
+                                                <li>@novel.Genre.Name</li>
+                                            </ul>
+                                            <h5><a href="@novel.Link">@novel.Title</a></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="product__pagination">
+                        @if (Convert.ToInt32(ViewData["CurrentPage"]) > 1)
+                        {
+                            <a asp-action="Index" asp-route-id="@ViewData["GenreId"]" asp-route-page="@(Convert.ToInt32(ViewData["CurrentPage"]) - 1)" asp-route-pageSize="@ViewData["PageSize"]">&laquo;</a>
+                        }
+
+                        @for (int i = 1; i <= Convert.ToInt32(ViewData["TotalPages"]); i++)
+                        {
+                            <a asp-action="Index" asp-route-id="@ViewData["GenreId"]" asp-route-page="@i" asp-route-pageSize="@ViewData["PageSize"]" class="@(i == Convert.ToInt32(ViewData["CurrentPage"]) ? "current-page" : "")">@i</a>
+                        }
+
+                        @if (Convert.ToInt32(ViewData["CurrentPage"]) < Convert.ToInt32(ViewData["TotalPages"]))
+                        {
+                            <a asp-action="Index" asp-route-id="@ViewData["GenreId"]" asp-route-page="@(Convert.ToInt32(ViewData["CurrentPage"]) + 1)" asp-route-pageSize="@ViewData["PageSize"]">&raquo;</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+    <!-- Footer Section Begin -->
+   
+    <!-- Footer Section End -->
+    <!-- Search model Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch"><i class="icon_close"></i></div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+    <!-- Js Plugins -->
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/lightNovelHub")
+            .build();
+
+        connection.start().catch(err => console.error(err));
+
+        connection.on("ReceiveUpdate", (lightNovels) => {
+            updateLightNovels(lightNovels);
+        });
+
+        function updateLightNovels(lightNovels) {
+            let lightNovelList = document.getElementById("lightNovelList");
+            if (!lightNovelList) return;
+
+            lightNovelList.innerHTML = "";
+            lightNovels.forEach(novel => {
+                lightNovelList.innerHTML += `
+                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                            <div class="product__item">
+                                                <div class="product__item__pic set-bg" data-setbg="~/images/${novel.ImgUrl}">
+                                                    <div class="ep">${novel.Episodes} Episodes</div>
+                                                    <div class="comment"><i class="fa"></i> ${novel.Cost}🪙</div>
+                                                    <div class="view"><i class="fa fa-eye"></i> ${novel.Read}</div>
+                                                </div>
+                                                <div class="product__item__text">
+                                                    <ul>
+                                                        <li> Rank ${novel.Ranked}</li>
+                                                        <li>${novel.Genre.Name}</li>
+                                                    </ul>
+                                                    <h5><a href="${novel.Link}">${novel.Title}</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>`;
+            });
+        }
+    </script>
+</body>

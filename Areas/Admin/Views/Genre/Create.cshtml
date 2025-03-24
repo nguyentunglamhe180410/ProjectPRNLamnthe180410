@@ -1,0 +1,23 @@
+﻿@model Genre
+@{
+    ViewData["Title"] = "Create Genre";
+    Layout = "_Layout";
+}
+
+<section class="product spad">
+    <div class="container">
+        <h2>Create Genre</h2>
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label>Name</label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input asp-for="Description" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,216 @@
+﻿
+
+@{
+    ViewData["Title"] = "Search";
+    Layout = "_Layout";
+}
+<meta charset="UTF-8">
+<meta name="description" content="Anime Template">
+<meta name="keywords" content="Anime, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Anime | Template</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+<link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Main Content -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <!-- Left Sidebar (Search Form) - 4/12 Columns -->
+            <div class="col-lg-4 col-md-12">
+                <div class="sidebar">
+                    <h2>Search Light Novels</h2>
+                    <form method="get" action="/Search/Index" id="searchForm">
+                        <!-- Search Bar -->
+                        <div class="form-group">
+                            <label for="search" style="color:white">Search by Title:</label>
+                            <input type="text" id="search" name="search" class="form-control" value="@Model.SearchQuery" placeholder="Enter title..." />
+                        </div>
+
+                        <!-- Sort By Dropdown -->
+                        <div class="form-group">
+                            <label for="sortBy" style="color:white">Sort By:</label>
+                            <select id="sortBy" name="sortBy" class="form-control">
+                                @{
+                                    var sortOptions = new[]
+                                    {
+                                new { Value = "All", Text = "All" },
+                                new { Value = "coins", Text = "Coins" },
+                                new { Value = "name", Text = "Name" },
+                                new { Value = "buyCount", Text = "Buy Count" },
+                                new { Value = "score", Text = "Score" },
+                                new { Value = "aired", Text = "Aired Date" },
+                                new { Value = "ranking", Text = "Ranking" }
+                                };
+                                }
+                                @foreach (var option in sortOptions)
+                                {
+                                    <option value="@option.Value" selected="@(Model.SortBy == option.Value || (Model.SortBy == null && option.Value == "All"))" style="color:white">@option.Text</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Ascending/Descending Radio Buttons -->
+                        <div class="form-group">
+                            <label style="color:white">Order:</label>
+                            <div class="form-check">
+                                <input type="radio" style="color:white" id="descending" name="descending" value="true"
+                                @(Model.Descending ? "checked" : "") class="form-check-input" />
+                                <label for="descending" class="form-check-label">Descending</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" style="color:white" id="ascending" name="descending" value="false"
+                                @(!Model.Descending ? "checked" : "") class="form-check-input" />
+                                <label for="ascending" class="form-check-label">Ascending</label>
+                            </div>
+                        </div>
+
+                        <!-- Genre Checkboxes -->
+                        <div class="form-group">
+                            <label style="color:white">Genres:</label>
+                            <div class="form-check">
+                                <input type="checkbox" id="genreAll" name="genreIds" value="All"
+                                       class="form-check-input" @(Model.SelectedGenreIds.Count == Model.AvailableGenres.Count ? "checked" : "") />
+                                <label for="genreAll" class="form-check-label" style="color:white">All</label>
+                            </div>
+                            @foreach (var genre in Model.AvailableGenres)
+                            {
+                                <div class="form-check">
+                                    <input type="checkbox" id="genre_@genre.Id" name="genreIds" value="@genre.Id"
+                                           class="form-check-input genre-checkbox"
+                                    @(Model.SelectedGenreIds.Contains(genre.Id) ? "checked" : "") />
+                                    <label for="genre_@genre.Id" class="form-check-label" style="color:white">@genre.Name</label>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Hidden Pagination Fields -->
+                        <input type="hidden" name="page" value="1" />
+                        <input type="hidden" name="pageSize" value="@Model.PageSize" />
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Content (Light Novels) - 8/12 Columns -->
+            <div class="col-lg-8 col-md-12">
+                <h3>Results (@Model.TotalItems items)</h3>
+                @if (Model.LightNovels != null)
+                {
+                    <div class="row">
+                        @foreach (var ln in Model.LightNovels)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="~/images/@ln.ImgUrl">
+                                        <div class="ep">@ln.Episodes Episodes</div>
+                                        <div class="comment"><i class="fa"></i> @ln.Cost🪙</div>
+                                        <div class="view"><i class="fa fa-eye"></i> @ln.Read</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Rank @ln.Ranked</li>
+                                            <li>@ln.Genre.Name</li>
+                                        </ul>
+                                        <h5><a href="@ln.Link">@ln.Title</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { search = Model.SearchQuery, sortBy = Model.SortBy, descending = Model.Descending, genreIds = Model.SelectedGenreIds, page = Model.Page - 1, pageSize = Model.PageSize })" aria-label="Previous">
+                                    <span aria-hidden="true">« Previous</span>
+                                </a>
+                            </li>
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                <li class="page-item @(Model.Page == i ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", new { search = Model.SearchQuery, sortBy = Model.SortBy, descending = Model.Descending, genreIds = Model.SelectedGenreIds, page = i, pageSize = Model.PageSize })">@i</a>
+                                </li>
+                            }
+                            <li class="page-item @(Model.Page == Model.TotalPages ? "disabled" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { search = Model.SearchQuery, sortBy = Model.SortBy, descending = Model.Descending, genreIds = Model.SelectedGenreIds, page = Model.Page + 1, pageSize = Model.PageSize })" aria-label="Next">
+                                    <span aria-hidden="true">Next »</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                }
+                else
+                {
+                    <p>No light novels found.</p>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript Includes -->
+@section Scripts {
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const allCheckbox = document.getElementById('genreAll');
+            const genreCheckboxes = document.querySelectorAll('.genre-checkbox');
+
+            allCheckbox.addEventListener('change', function () {
+                if (this.checked) {
+                    genreCheckboxes.forEach(cb => cb.checked = true);
+                } else {
+                    genreCheckboxes.forEach(cb => cb.checked = false);
+                }
+            });
+
+            genreCheckboxes.forEach(cb => {
+                cb.addEventListener('change', function () {
+                    if (!this.checked && allCheckbox.checked) {
+                        allCheckbox.checked = false;
+                    }
+                    if (Array.from(genreCheckboxes).every(cb => cb.checked)) {
+                        allCheckbox.checked = true;
+                    }
+                });
+            });
+
+            // Initialize background images for product items
+            $('.set-bg').each(function () {
+                var bg = $(this).data('setbg');
+                $(this).css('background-image', 'url(' + bg + ')');
+            });
+        });
+    </script>
+}
