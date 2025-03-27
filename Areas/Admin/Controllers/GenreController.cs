@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.SignalR;
 using ProjectPRNLamnthe180410.Hubs;
 using ProjectPRNLamnthe180410.Models;
 using ProjectPRNLamnthe180410.Services.Interface;
+using System.Threading.Tasks;
+using System.Linq;
+using X.PagedList;
+using X.PagedList.Extensions;
 
 namespace ProjectPRNLamnthe180410.Areas.Admin.Controllers
 {
@@ -10,9 +14,8 @@ namespace ProjectPRNLamnthe180410.Areas.Admin.Controllers
     public class GenreController : Controller
     {
         private readonly IGenreService _genreService;
-        private readonly IHubContext<LightNovelHub> _hubContext;
-
-
+        private readonly IHubContext<LightNovelHub> _hubContext; // Changed to AdminHub
+        private const int PageSize = 5;
 
         public GenreController(IGenreService genreService, IHubContext<LightNovelHub> hubContext)
         {
@@ -22,72 +25,61 @@ namespace ProjectPRNLamnthe180410.Areas.Admin.Controllers
 
         private bool IsAdmin() => HttpContext.Session.GetInt32("UserID") == -1;
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchQuery = "", int? page = 1)
         {
-            if (!IsAdmin()) return View("NoAuthorization");
+            if (!IsAdmin()) return View("~/Views/Shared/NoAuthorization.cshtml");
+
             var genres = await _genreService.GetAllGenresAsync();
-            await _hubContext.Clients.All.SendAsync("ReceiveUpdate", genres);
 
-            return View(genres);
-        }
+            // Apply search filter
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                genres = genres.Where(g => g.Name.ToLower().Contains(searchQuery.ToLower())).ToList();
+            }
 
-        public IActionResult Create()
-        {
-            if (!IsAdmin()) return View("NoAuthorization");
+            // Pagination with X.PagedList
+            int pageNumber = page ?? 1;
+            var pagedGenres = genres.ToPagedList(pageNumber, PageSize);
 
-            return View();
+            ViewBag.SearchQuery = searchQuery;
+
+            // Broadcast search and page changes
+            await _hubContext.Clients.All.SendAsync("ReceiveGenrePageUpdate", searchQuery, pageNumber);
+
+            return View(pagedGenres);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Genre genre)
+        public async Task<IActionResult> Create(Genre genre, string searchQuery = "", int? page = 1)
         {
-            if (!IsAdmin()) return View("NoAuthorization");
+            if (!IsAdmin()) return View("~/Views/Shared/NoAuthorization.cshtml");
 
             await _genreService.AddGenreAsync(genre);
-            await _hubContext.Clients.All.SendAsync("ReceiveUpdate", genre);
-
-            return RedirectToAction("Index");
-        }
-
-        public async Task<IActionResult> Edit(int id)
-        {
-            if (!IsAdmin()) return View("NoAuthorization");
-            var genre = await _genreService.GetGenreByIdAsync(id);
-            if (genre == null) return NotFound();
-            await _hubContext.Clients.All.SendAsync("ReceiveUpdate", genre);
-
-            return View(genre);
+            await _hubContext.Clients.All.SendAsync("ReceiveGenreUpdate", $"Genre Created: {genre.Name}");
+            return RedirectToAction("Index", new { searchQuery, page });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Genre genre)
+        public async Task<IActionResult> Edit(Genre genre, string searchQuery = "", int? page = 1)
         {
-            if (!IsAdmin()) return View("NoAuthorization");
+            if (!IsAdmin()) return View("~/Views/Shared/NoAuthorization.cshtml");
 
             await _genreService.UpdateGenreAsync(genre);
-            await _hubContext.Clients.All.SendAsync("ReceiveUpdate", genre);
-
-            return RedirectToAction("Index");
+            await _hubContext.Clients.All.SendAsync("ReceiveGenreUpdate", $"Genre Updated: {genre.Name}");
+            return RedirectToAction("Index", new { searchQuery, page });
         }
 
-        public async Task<IActionResult> Delete(int id)
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, string searchQuery = "", int? page = 1)
         {
-            if (!IsAdmin()) return View("NoAuthorization");
+            if (!IsAdmin()) return View("~/Views/Shared/NoAuthorization.cshtml");
+
             var genre = await _genreService.GetGenreByIdAsync(id);
             if (genre == null) return NotFound();
-            await _hubContext.Clients.All.SendAsync("ReceiveUpdate", genre);
 
-            return View(genre);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (!IsAdmin()) return View("NoAuthorization");
             await _genreService.DeleteGenreAsync(id);
-            await _hubContext.Clients.All.SendAsync("ReceiveUpdate", "Admin", true);
-
-            return RedirectToAction("Index");
+            await _hubContext.Clients.All.SendAsync("ReceiveGenreUpdate", $"Genre Deleted: {genre.Name}");
+            return RedirectToAction("Index", new { searchQuery, page });
         }
     }
 }

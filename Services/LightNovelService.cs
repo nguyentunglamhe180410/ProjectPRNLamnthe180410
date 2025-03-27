@@ -11,11 +11,13 @@ namespace ProjectPRNLamnthe180410.Services
     {
         private readonly ILightNovelRepository _lightNovelRepository;
         private readonly IGenreRepository _genreRepository;
+        private readonly IUserRepository _userRepository;
 
-        public LightNovelService(ILightNovelRepository lightNovelRepository, IGenreRepository genreRepository)
+        public LightNovelService(ILightNovelRepository lightNovelRepository, IGenreRepository genreRepository, IUserRepository userRepository)
         {
             _lightNovelRepository = lightNovelRepository;
             _genreRepository = genreRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<LightNovel>> GetAllLightNovelsAsync()
@@ -76,7 +78,22 @@ namespace ProjectPRNLamnthe180410.Services
         {
             return await _lightNovelRepository.GetLightNovelsByGenreIdAsync(genreId);
         }
+        public async Task<bool> CheckCanBuyAsync(int userId, int lnId)
+        {
+            var user = await _userRepository.GetUserByIdAsync(userId);
+            var ln = await GetLightNovelByIdAsync(lnId);
 
+            if (user == null || ln == null) return false;
 
+            int userCoins = user.Coins ?? 0;
+            int lnCost = ln.Cost ?? 0;
+
+            return userCoins >= lnCost; 
+        }
+
+        public async Task RecordPurchaseAsync(int userId, int id)
+        {
+            await _lightNovelRepository.RecordPurchaseAsync(userId, id);
+        }
     }
 }

@@ -170,7 +170,23 @@ namespace ProjectPRNLamnthe180410.Repositories
                 .Where(n => n.GenreId == genreId)
                 .ToListAsync();
         }
+        public async Task RecordPurchaseAsync(int userId, int lnId)
+        {
+            // Check if already owned
+            var alreadyOwned = await _context.Boughts.AnyAsync(b => b.UserId == userId && b.TitleId == lnId);
+            if (alreadyOwned)
+            {
+                throw new InvalidOperationException("User already owns this light novel.");
+            }
 
+            var purchase = new Bought
+            {
+                UserId = userId,
+                TitleId = lnId
+            };
+            await _context.Boughts.AddAsync(purchase);
+            await _context.SaveChangesAsync();
+        }
 
     }
 }

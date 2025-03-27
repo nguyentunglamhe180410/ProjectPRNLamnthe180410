@@ -69,7 +69,7 @@ namespace ProjectPRNLamnthe180410.Controllers
             var newComment = await _commentService.AddCommentAsync(lightNovelId, (int)userId, content);
 
             // Notify all clients via SignalR
-            
+
             await _hubContext.Clients.All.SendAsync("ReceiveUpdate",
                 newComment.Id,
                 user != null ? user.Username : "Anonymous",
@@ -78,5 +78,58 @@ namespace ProjectPRNLamnthe180410.Controllers
 
             return RedirectToAction("Index", new { id = lightNovelId });
         }
+        [HttpPost]
+        public async Task<IActionResult> Buy(int id)
+        {
+            int? userId = HttpContext.Session.GetInt32("UserID");
+            if (userId == null || userId == -1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            var lightNovel = await _lightNovelService.GetLightNovelByIdAsync(id);
+            if (lightNovel == null)
+            {
+                TempData["Error"] = "Light novel not found.";
+                return RedirectToAction("Index", new { id });
+            }
+
+            var canBuy = await _lightNovelService.CheckCanBuyAsync((int)userId, id);
+            if (!canBuy)
+            {
+                TempData["Error"] = "Insufficient coins to purchase this light novel.";
+                return RedirectToAction("Index", new { id });
+            }
+
+            try
+            {
+                // Deduct coins
+                await _userService.UpdateCoinsAsync((int)userId, (int)-lightNovel.Cost);
+
+                // Record purchase in Bought table
+                await _lightNovelService.RecordPurchaseAsync((int)userId, id);
+
+                // Notify via SignalR with a purchase message in comment-like format
+                var user = await _userService.GetUserByIdAsync((int)userId);
+                await _hubContext.Clients.All.SendAsync("ReceiveUpdate",
+                    0, // Dummy ID to indicate purchase (comments use real IDs)
+                    user.Username,
+                    $"purchased {lightNovel.Title}", // Content indicates a purchase
+                    DateTime.UtcNow.ToString("o"));
+
+                TempData["Success"] = $"Successfully purchased {lightNovel.Title}!";
+            }
+            catch (InvalidOperationException ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "An error occurred during purchase.";
+            }
+
+            return RedirectToAction("Index", new { id });
+        }
     }
 }
+

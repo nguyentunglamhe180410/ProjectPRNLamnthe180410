@@ -25,62 +25,53 @@ namespace ProjectPRNLamnthe180410.Controllers
             if (userId != null && userId != -1)
             {
                 var user = await _userService.GetUserByIdAsync((int)userId);
+                if (user == null)
+                {
+                    return RedirectToAction("Index", "Login"); 
+                }
                 ViewData["User"] = user;
                 return View(user);
             }
-            else return RedirectToAction("Index", "Login");
-        }
-
-        // Edit profile view
-        public async Task<IActionResult> Edit()
-        {
-            int? userId = HttpContext.Session.GetInt32("UserID");
-            if (userId != null && userId != -1)
+            else
             {
-                var user = await _userService.GetUserByIdAsync((int)userId);
-                ViewData["User"] = user;
-
-                return View(user);
+                return RedirectToAction("Index", "Login");
             }
-            else return RedirectToAction("Index", "Login");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string password, string description, IFormFile profilePicture)
+        public async Task<IActionResult> Edit(string description, IFormFile profilePicture)
         {
             int? userId = HttpContext.Session.GetInt32("UserID");
             if (userId != null && userId != -1)
             {
                 var user = await _userService.GetUserByIdAsync((int)userId);
-                ViewData["User"] = user;
-                if (!string.IsNullOrEmpty(password))
+                if (user == null)
                 {
-                    user.Password = password;
+                    return RedirectToAction("Index", "Login"); 
                 }
 
                 user.Description = description;
 
                 if (profilePicture != null && profilePicture.Length > 0)
                 {
-                    var fileName = Path.GetFileName(profilePicture.FileName);
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(profilePicture.FileName); 
                     var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await profilePicture.CopyToAsync(stream);
                     }
-                    user.ProfilePicture = "/uploads/" + fileName;
+                    user.ProfilePicture = "/images/" + fileName;
                 }
 
                 await _userService.UpdateUserAsync(user);
-                await _hubContext.Clients.All.SendAsync("ReceiveUpdate", user);
-                return View(user);
+                await _hubContext.Clients.All.SendAsync("ReceiveUpdate", $"Profile Updated: {user.Username}");
+
+                return RedirectToAction("Index");
             }
-            else return RedirectToAction("Index", "Login");
-
-
-
-                
-            
+            else
+            {
+                return RedirectToAction("Index", "Login"); 
+            }
         }
 
     }

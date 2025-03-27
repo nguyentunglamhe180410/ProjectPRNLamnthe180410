@@ -78,6 +78,11 @@ namespace ProjectPRNLamnthe180410.Services
         {
             return await _userRepository.HasUserBoughtLightNovelAsync(userId, lightNovelId);
         }
+        public async Task<int> GetUserCoinsAsync(int id)
+        {
+            var user = await GetUserByIdAsync(id);
+            return user?.Coins ?? 0;
+        }
 
     }
 

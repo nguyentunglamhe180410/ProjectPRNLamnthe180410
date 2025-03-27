@@ -144,3 +144,7 @@ D:\Tai lieu hoc tap\FPT\PRN212\Code\ProjectPRNLamnthe180410\bin\Debug\net8.0\Mic
 D:\Tai lieu hoc tap\FPT\PRN212\Code\ProjectPRNLamnthe180410\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\Tai lieu hoc tap\FPT\PRN212\Code\ProjectPRNLamnthe180410\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
 D:\Tai lieu hoc tap\FPT\PRN212\Code\ProjectPRNLamnthe180410\obj\Debug\net8.0\scopedcss\Areas\Admin\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Tai lieu hoc tap\FPT\PRN212\Code\ProjectPRNLamnthe180410\obj\Debug\net8.0\ProjectPRNLamnthe180410.sourcelink.json
+D:\Tai lieu hoc tap\FPT\PRN212\Code\ProjectPRNLamnthe180410\bin\Debug\net8.0\X.PagedList.dll
+D:\Tai lieu hoc tap\FPT\PRN212\Code\ProjectPRNLamnthe180410\bin\Debug\net8.0\X.PagedList.Mvc.Core.dll
+D:\Tai lieu hoc tap\FPT\PRN212\Code\ProjectPRNLamnthe180410\obj\Debug\net8.0\ProjectPRNLamnthe180410.MvcApplicationPartsAssemblyInfo.cs

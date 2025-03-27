@@ -53,7 +53,7 @@
                 {
                     @foreach (var novel in topScoredLightNovels)
                     {
-                        <div class="hero__items set-bg" data-setbg="@Url.Content($"/images/{novel.ImgUrl}")">
+                        <div class="hero__items set-bg" data-setbg="@Url.Content($"~/images/{novel.ImgUrl}")">
                             <p>@Url.Content($"~/images/{novel.ImgUrl}")</p>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -99,7 +99,7 @@
                                 {
                                     <div class="col-lg-4 col-md-6 col-sm-6">
                                         <div class="product__item">
-                                            <div class="product__item__pic set-bg" data-setbg="~/images/@novel.ImgUrl">
+                                            <div class="product__item__pic set-bg" data-setbg="@novel.ImgUrl">
                                                 <div class="ep">@novel.Episodes Episodes</div>
                                                 <div class="comment"><i class="fa"></i> @novel.Cost🪙</div>
                                                 <div class="view"><i class="fa fa-eye"></i> @novel.Read</div>

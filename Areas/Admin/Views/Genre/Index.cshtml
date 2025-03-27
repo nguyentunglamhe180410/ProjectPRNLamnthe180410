@@ -1,17 +1,30 @@
-﻿@model List<Genre>
+﻿@model X.PagedList.IPagedList<ProjectPRNLamnthe180410.Models.Genre>
+@using X.PagedList.Mvc.Core;
 @{
     ViewData["Title"] = "Manage Genres";
     Layout = "_Layout";
+    var searchQuery = ViewBag.SearchQuery as string ?? "";
 }
 
 <section class="product spad">
     <div class="container">
         <h2>Manage Genres</h2>
-        <a href="@Url.Action("Create")" class="btn btn-primary mb-3">Add New Genre</a>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form asp-action="Index" method="get" class="form-inline">
+                    <input type="text" name="searchQuery" value="@searchQuery" class="form-control mr-2" placeholder="Search by name or description..." />
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+            <div class="col-md-6 text-right">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#createModal">Add New Genre</button>
+            </div>
+        </div>
         <table class="table" id="genreTable">
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Description</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -20,20 +33,126 @@
                 {
                     <tr data-id="@genre.Id">
                         <td>@genre.Name</td>
+                        <td>@genre.Description</td>
                         <td>
-                            <a href="@Url.Action("Edit", new { id = genre.Id })" class="btn btn-warning">Edit</a>
-                            <a href="@Url.Action("Delete", new { id = genre.Id })" class="btn btn-danger">Delete</a>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#editModal" onclick="fillEditForm(@genre.Id, '@genre.Name', '@genre.Description')">Edit</button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" onclick="setDeleteId(@genre.Id)">Delete</button>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { searchQuery, page }), 
+                new PagedListRenderOptions 
+                { 
+                    LiElementClasses = new[] { "page-item" }, 
+                    PageClasses = new[] { "page-link" },
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always
+                })
+        </div>
         <div class="mt-4">
             <h4>Real-Time Updates</h4>
             <ul id="updateList" class="list-group"></ul>
         </div>
     </div>
 </section>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Create Genre</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form id="createForm" asp-action="Create" method="post" onsubmit="return validateCreateForm()">
+                <input type="hidden" name="searchQuery" value="@searchQuery" />
+                <input type="hidden" name="page" value="@Model.PageNumber" />
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input name="Name" id="createName" class="form-control" />
+                        <span id="createNameError" class="text-danger" style="display:none;">Name is required</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input name="Description" id="createDescription" class="form-control" />
+                        <span id="createDescriptionError" class="text-danger" style="display:none;">Description is required</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Genre</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form id="editForm" asp-action="Edit" method="post" onsubmit="return validateEditForm()">
+                <input type="hidden" name="searchQuery" value="@searchQuery" />
+                <input type="hidden" name="page" value="@Model.PageNumber" />
+                <div class="modal-body">
+                    <input type="hidden" name="Id" id="editId" />
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input name="Name" id="editName" class="form-control" />
+                        <span id="editNameError" class="text-danger" style="display:none;">Name is required</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input name="Description" id="editDescription" class="form-control" />
+                        <span id="editDescriptionError" class="text-danger" style="display:none;">Description is required</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Genre</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form asp-action="Delete" method="post">
+                <input type="hidden" name="searchQuery" value="@searchQuery" />
+                <input type="hidden" name="page" value="@Model.PageNumber" />
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="deleteId" />
+                    <p>Are you sure you want to delete this genre?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <script src="~/js/jquery-3.3.1.min.js"></script>
@@ -44,25 +163,108 @@
             .withUrl("/lightNovelHub")
             .build();
 
-        connection.on("ReceiveUpdate", (message) => {
-            // Log the update
+        let lastUpdate = { searchQuery: '@searchQuery', page: @Model.PageNumber, timestamp: 0 };
+        let isRefreshing = false;
+
+        connection.on("ReceiveGenreUpdate", (message) => {
             const li = document.createElement("li");
             li.textContent = message;
             li.className = "list-group-item";
             document.getElementById("updateList").prepend(li);
 
-            // Refresh the table by fetching updated data
-            fetch('/Admin/Genre/Index')
+            $('#createModal').modal('hide');
+            $('#editModal').modal('hide');
+            $('#deleteModal').modal('hide');
+
+            refreshPage('@searchQuery', @Model.PageNumber);
+        });
+
+        connection.on("ReceiveGenrePageUpdate", (searchQuery, page) => {
+            const now = Date.now();
+            const updateKey = `${searchQuery}-${page}`;
+            const currentKey = `${lastUpdate.searchQuery}-${lastUpdate.page}`;
+
+            if (updateKey !== currentKey && !isRefreshing) {
+                const li = document.createElement("li");
+                li.textContent = `Page updated: Search="${searchQuery}", Page=${page}`;
+                li.className = "list-group-item";
+                document.getElementById("updateList").prepend(li);
+
+                lastUpdate = { searchQuery, page, timestamp: now };
+                refreshPage(searchQuery, page);
+            }
+        });
+
+        connection.start().catch(err => console.error(err));
+
+        function refreshPage(searchQuery, page) {
+            if (isRefreshing) return;
+            isRefreshing = true;
+
+            fetch(`/Admin/Genre/Index?searchQuery=${encodeURIComponent(searchQuery)}&page=${page}`)
                 .then(response => response.text())
                 .then(html => {
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
                     const newTable = doc.querySelector('#genreTable');
+                    const newPagination = doc.querySelector('.pagination-container');
                     document.querySelector('#genreTable').outerHTML = newTable.outerHTML;
-                })
-                .catch(err => console.error('Error refreshing table:', err));
-        });
+                    document.querySelector('.pagination-container').outerHTML = newPagination.outerHTML;
 
-        connection.start().catch(err => console.error(err));
+                    document.querySelector('input[name="searchQuery"]').value = searchQuery;
+                })
+                .catch(err => console.error('Error refreshing page:', err))
+                .finally(() => isRefreshing = false);
+        }
+
+        function fillEditForm(id, name, description) {
+            document.getElementById('editId').value = id;
+            document.getElementById('editName').value = name;
+            document.getElementById('editDescription').value = description || '';
+        }
+
+        function setDeleteId(id) {
+            document.getElementById('deleteId').value = id;
+        }
+
+        function validateCreateForm() {
+            let isValid = true;
+            document.getElementById('createNameError').style.display = 'none';
+            document.getElementById('createDescriptionError').style.display = 'none';
+
+            const name = document.getElementById('createName').value.trim();
+            const description = document.getElementById('createDescription').value.trim();
+
+            if (!name) {
+                document.getElementById('createNameError').style.display = 'block';
+                isValid = false;
+            }
+            if (!description) {
+                document.getElementById('createDescriptionError').style.display = 'block';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function validateEditForm() {
+            let isValid = true;
+            document.getElementById('editNameError').style.display = 'none';
+            document.getElementById('editDescriptionError').style.display = 'none';
+
+            const name = document.getElementById('editName').value.trim();
+            const description = document.getElementById('editDescription').value.trim();
+
+            if (!name) {
+                document.getElementById('editNameError').style.display = 'block';
+                isValid = false;
+            }
+            if (!description) {
+                document.getElementById('editDescriptionError').style.display = 'block';
+                isValid = false;
+            }
+
+            return isValid;
+        }
     </script>
 }

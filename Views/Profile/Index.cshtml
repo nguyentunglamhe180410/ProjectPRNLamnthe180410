@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "User Profile";
-    Layout = "_Layout";
-    var user = ViewData["User"] as User;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = ViewData["User"] as ProjectPRNLamnthe180410.Models.User;
 }
 
 <meta charset="UTF-8">
@@ -13,8 +13,7 @@
 
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <!-- Css Styles -->
 <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
@@ -34,8 +33,8 @@
                 <div class="card">
                     <img src="@(user.ProfilePicture ?? "/img/default-profile.png")" class="card-img-top" alt="Profile Picture" style="max-height: 300px; object-fit: cover;">
                     <div class="card-body text-center">
-                        <h5 class="card-title">@Model.Username</h5>
-                        <a href="@Url.Action("Edit")" class="btn btn-primary">Edit Profile</a>
+                        <h5 class="card-title">@user.Username</h5>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit Profile</button>
                     </div>
                 </div>
             </div>
@@ -47,14 +46,11 @@
                             <dt class="col-sm-3">Username</dt>
                             <dd class="col-sm-9">@user.Username</dd>
 
-                            <dt class="col-sm-3">Password</dt>
-                            <dd class="col-sm-9">********</dd>
+                            <dt class="col-sm-3">Email</dt>
+                            <dd class="col-sm-9">@user.Email</dd>
 
                             <dt class="col-sm-3">Coins</dt>
-                            <dd class="col-sm-9">@(user.Coins.HasValue ? Model.Coins.Value.ToString() : "0")</dd>
-
-                            <dt class="col-sm-3">Status</dt>
-                            <dd class="col-sm-9">@(user.Status ? "Normal" : "Inactive")</dd>
+                            <dd class="col-sm-9">@(user.Coins.HasValue ? user.Coins.Value.ToString() : "0")</dd>
 
                             <dt class="col-sm-3">Description</dt>
                             <dd class="col-sm-9">@(user.Description ?? "No description provided.")</dd>
@@ -69,29 +65,65 @@
         </div>
     </div>
 </section>
-<script src="~/js/jquery-3.3.1.min.js"></script>
-<script src="~/js/bootstrap.min.js"></script>
-<script src="~/js/player.js"></script>
-<script src="~/js/jquery.nice-select.min.js"></script>
-<script src="~/js/mixitup.min.js"></script>
-<script src="~/js/jquery.slicknav.js"></script>
-<script src="~/js/owl.carousel.min.js"></script>
-<script src="~/js/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
-<script>
-    const connection = new signalR.HubConnectionBuilder()
-        .withUrl("/lightNovelHub")
-        .build();
 
-    connection.on("ReceiveUpdate", (message) => {
-        const li = document.createElement("li");
-        li.textContent = message;
-        li.className = "list-group-item";
-        document.getElementById("updateList").prepend(li);
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form id="editForm" asp-controller="Profile" asp-action="Edit" method="post" enctype="multipart/form-data" onsubmit="return validateEditForm()">
+                <input type="hidden" name="Id" value="@user.Id" />
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input name="Description" id="editDescription" class="form-control" value="@user.Description" />
+                        <span id="editDescriptionError" class="text-danger" style="display:none;">Description is required</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Profile Picture</label>
+                        <input type="file" name="profilePicture" id="editProfilePicture" class="form-control-file" accept="image/*" />
+                        <small class="form-text text-muted">Current: @(user.ProfilePicture ?? "None")</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-        // Optional: Refresh profile data if it's the current user's update
-        if (message.includes("@user.Username")) {
-            fetch('/UserProfile/Index')
+@section Scripts {
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/lightNovelHub")
+            .build();
+
+        connection.on("ReceiveUpdate", (message) => {
+            const li = document.createElement("li");
+            li.className = "list-group-item";
+            location.reload();
+            document.getElementById("updateList").prepend(li);
+
+            $('#editModal').modal('hide');
+
+            // Refresh profile data
+            fetch('/Profile/Index')
                 .then(response => response.text())
                 .then(html => {
                     const parser = new DOMParser();
@@ -100,8 +132,22 @@
                     document.querySelector('.container').outerHTML = newContent.outerHTML;
                 })
                 .catch(err => console.error('Error refreshing profile:', err));
-        }
-    });
+        });
 
-    connection.start().catch(err => console.error(err));
-</script>
+        connection.start().catch(err => console.error(err));
+
+        function validateEditForm() {
+            let isValid = true;
+            document.getElementById('editDescriptionError').style.display = 'none';
+
+            const description = document.getElementById('editDescription').value.trim();
+
+            if (!description) {
+                document.getElementById('editDescriptionError').style.display = 'block';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+}

@@ -15,6 +15,7 @@ namespace ProjectPRNLamnthe180410.Services.Interface
         Task<IEnumerable<LightNovel>> GetLightNovelsByGenreIdAsync(int genreId);
         Task<IEnumerable<LightNovel>> FilterAsync(string? search, string? sortBy, bool descending, int page, int amount, bool visibleOnly,bool isBought, int? userID);
         Task<IEnumerable<LightNovel>> FilterFromListAsync(IEnumerable<LightNovel> lightNovelList, string? search, string? sortBy, bool descending, int pageSize, int page, bool visibleOnly, bool isBought, int? userID);
-
+        Task<bool> CheckCanBuyAsync(int userId, int lnId);
+        Task RecordPurchaseAsync(int userId, int id);
     }
 }
