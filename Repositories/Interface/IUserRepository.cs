@@ -15,5 +15,8 @@ namespace ProjectPRNLamnthe180410.Repositories.Interface
         Task<bool> UserExistsAsync(int id);
         Task SaveChangesAsync();
         Task<bool> HasUserBoughtLightNovelAsync(int userId, int lightNovelId);
+        Task UpdateHistoryAsync(History history);
+        Task<History> GetHistoryByIdAsync(int id);
+        Task AddHistoryAsync(History history);
     }
 }

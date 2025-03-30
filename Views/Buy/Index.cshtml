@@ -1,0 +1,185 @@
+﻿@model ProjectPRNLamnthe180410.Models.ViewModel.PaymentResponseModel
+
+@{
+    ViewData["Title"] = "Buy Coins";
+    var user = ViewData["User"] as User; 
+    Layout = "_Layout";
+}
+<meta charset="UTF-8">
+<meta name="description" content="Anime Template">
+<meta name="keywords" content="Anime, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Anime | Template</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+<link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+<style>
+    body {
+        background-color: #0b0c2a;
+        color: #ffffff;
+        font-family: 'Mulish', sans-serif;
+    }
+
+    .buy-coins-section {
+        padding: 50px 0;
+    }
+
+    .buy-coins-container {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #1a1b3a;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+        .buy-coins-container h2 {
+            color: #ffffff;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            color: #b7b7b7;
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #3a3b5a;
+            border-radius: 5px;
+            background-color: #2a2b4a;
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+            .form-group input[type="number"]::-webkit-inner-spin-button,
+            .form-group input[type="number"]::-webkit-outer-spin-button {
+                opacity: 1;
+            }
+
+            .form-group input[type="number"]:focus {
+                outline: none;
+                border-color: #e53637;
+                box-shadow: 0 0 5px rgba(229, 54, 55, 0.5);
+            }
+
+    .user-info p {
+        margin: 5px 0;
+        color: #b7b7b7;
+        font-size: 14px;
+    }
+
+        .user-info p strong {
+            color: #ffffff;
+        }
+
+    .btn-primary {
+        background-color: #e53637;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 5px;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #c72e2f;
+        }
+
+    .login-prompt {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .login-prompt a {
+            color: #e53637;
+            text-decoration: none;
+        }
+
+            .login-prompt a:hover {
+                text-decoration: underline;
+            }
+
+    .text-danger {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+</style>
+
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<section class="buy-coins-section">
+    <div class="buy-coins-container">
+        <h2>Buy Coins</h2>
+
+        @if (user != null)
+        {
+            <form asp-action="ProcessPayment" method="post">
+                <div class="form-group">
+                    <label asp-for="Amount">Number of Coins</label>
+                    <input asp-for="Amount" type="number" min="1" required />
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+
+                <div class="form-group user-info">
+                    <input asp-for="Username" type="hidden" value="@user.Username" />
+                    <input asp-for="Email" type="hidden" value="@user.Email" />
+                    <p><strong>Username:</strong> @user.Username</p>
+                    <p><strong>Email:</strong> @user.Email</p>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Proceed to Payment" class="btn btn-primary" />
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="login-prompt">
+                <p>Please log in to buy coins.</p>
+                <a asp-action="Login" asp-controller="Account">Login</a>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

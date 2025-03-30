@@ -24,7 +24,13 @@
 <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
 <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="~/css/style.css" type="text/css">
-
+<style>
+    .scrollable-dropdown {
+        max-height: 200px; /* Fixed size */
+        overflow-y: auto; /* Scrollable */
+        min-width: 150px; /* Ensures readability */
+    }
+</style>
 <!-- Page Preloader -->
 <div id="preloder">
     <div class="loader"></div>
@@ -74,24 +80,37 @@
                             </div>
                         </div>
                         <div class="anime__details__btn">
-                            @if (user != null)
+                            @if (user != null && hasBought)
                             {
-                                @if (hasBought)
-                                {
-                                    <button class="btn btn-success" disabled>Read Now</button>
-                                }
-                                else
-                                {
-                                    <form asp-action="Buy" asp-route-id="@lightNovel.Id" method="post" class="d-inline">
-                                        <button type="submit" class="btn btn-primary">Buy Now for @lightNovel.Cost 🪙</button>
-                                    </form>
-                                }
+                                <div class="dropdown">
+                                    <button class="btn btn-success dropdown-toggle" type="button" id="readNowDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Read Now
+                                    </button>
+                                    <ul class="dropdown-menu scrollable-dropdown" aria-labelledby="readNowDropdown">
+                                        @for (int i = 1; i <= lightNovel.Episodes; i++)
+                                        {
+                                            <li>
+                                                <a class="dropdown-item" href="@Url.Action("Index", "Chapter", new { lightNovelId = lightNovel.Id, chapterNumber = i })">
+                                                    Chapter @i
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                            else if (user != null)
+                            {
+                                <form asp-action="Buy" asp-route-id="@lightNovel.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-primary">Buy Now for @lightNovel.Cost 🪙</button>
+                                </form>
                             }
                             else
                             {
                                 <a href="@Url.Action("Index", "Login")" class="btn btn-primary">Login to Buy</a>
                             }
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -252,20 +271,20 @@
             }
 
             const commentHtml = `
-                    <div class="anime__review__item">
-                        <div class="anime__review__item__pic">
-                            <img src="img/anime/review-6.jpg" alt="User Profile">
-                        </div>
-                        <div class="anime__review__item__text">
-                            <h6>${username} -
-                                <span class="timeago" data-timestamp="${createdAt}">
-                                    Just now
-                                </span>
-                            </h6>
-                            <p>${content}</p>
-                        </div>
-                    </div>
-                `;
+                                    <div class="anime__review__item">
+                                        <div class="anime__review__item__pic">
+                                            <img src="img/anime/review-6.jpg" alt="User Profile">
+                                        </div>
+                                        <div class="anime__review__item__text">
+                                            <h6>${username} -
+                                                <span class="timeago" data-timestamp="${createdAt}">
+                                                    Just now
+                                                </span>
+                                            </h6>
+                                            <p>${content}</p>
+                                        </div>
+                                    </div>
+                                `;
             commentSection.insertAdjacentHTML("afterbegin", commentHtml);
             updateTimeAgo();
         }

@@ -1,0 +1,224 @@
+﻿@model ProjectPRNLamnthe180410.Models.ViewModel.ChangePasswordViewModel
+
+@{
+    ViewData["Title"] = "Change/Forgot Password";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = ViewData["User"] as ProjectPRNLamnthe180410.Models.User;
+}
+
+<!-- Meta Tags -->
+<meta charset="UTF-8">
+<meta name="description" content="Anime Template">
+<meta name="keywords" content="Anime, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Anime | Template</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- CSS Styles -->
+<link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+<link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+<!-- Custom CSS -->
+<style>
+    body {
+        background-color: #0b0c2a;
+        color: #ffffff;
+        font-family: 'Mulish', sans-serif;
+    }
+
+    .password-section {
+        padding: 50px 0;
+    }
+
+    .password-container {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #1a1b3a;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+        .password-container h2 {
+            color: #ffffff;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            color: #b7b7b7;
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #3a3b5a;
+            border-radius: 5px;
+            background-color: #2a2b4a;
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+            .form-group input[type="email"]:focus,
+            .form-group input[type="password"]:focus {
+                outline: none;
+                border-color: #e53637;
+                box-shadow: 0 0 5px rgba(229, 54, 55, 0.5);
+            }
+
+        .form-group .text-danger {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+    .btn-primary {
+        background-color: #e53637;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 5px;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #c72e2f;
+        }
+
+    .g-recaptcha {
+        margin-bottom: 20px;
+    }
+
+    .login-prompt {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .login-prompt a {
+            color: #e53637;
+            text-decoration: none;
+        }
+
+            .login-prompt a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<!-- Password Section -->
+<section class="password-section">
+    <div class="container password-container">
+        <h2>@(user != null ? "Change Password" : "Forgot Password")</h2>
+
+        <form asp-action="UpdatePassword" method="post" onsubmit="return validatePasswordForm()">
+            @if (user != null)
+            {
+                <!-- For logged-in users: Show Current Password field -->
+                <div class="form-group">
+                    <label asp-for="CurrentPassword">Current Password</label>
+                    <input asp-for="CurrentPassword" type="password" required />
+                    <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+                </div>
+                <input asp-for="Email" type="hidden" value="@user.Email" />
+            }
+            else
+            {
+                <!-- For forgot password: Show Email field -->
+                <div class="form-group">
+                    <label asp-for="Email">Email</label>
+                    <input asp-for="Email" type="email" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            }
+
+            <div class="form-group">
+                <label asp-for="NewPassword">New Password</label>
+                <input asp-for="NewPassword" type="password" id="newPassword" required />
+                <span asp-validation-for="NewPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword">Confirm Password</label>
+                <input asp-for="ConfirmPassword" type="password" id="confirmPassword" required />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                <span id="passwordMatchError" class="text-danger" style="display:none;">Passwords do not match</span>
+            </div>
+
+            <!-- Google reCAPTCHA -->
+            <div class="g-recaptcha" data-sitekey="6LckleEpAAAAAEQGKWDtFrvzbJ1yRPoRBhohKcLT"></div>
+            <span id="captchaError" class="text-danger" style="display:none;">Please complete the CAPTCHA</span>
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+
+        @if (user == null)
+        {
+            <div class="login-prompt">
+                <p>Already have an account?</p>
+                <a asp-action="Login" asp-controller="Account">Login</a>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function validatePasswordForm() {
+            let isValid = true;
+
+            // Reset error messages
+            document.getElementById('passwordMatchError').style.display = 'none';
+            document.getElementById('captchaError').style.display = 'none';
+
+            // Validate password match
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (newPassword !== confirmPassword) {
+                document.getElementById('passwordMatchError').style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate reCAPTCHA
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                document.getElementById('captchaError').style.display = 'block';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+}

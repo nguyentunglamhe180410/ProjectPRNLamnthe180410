@@ -84,6 +84,40 @@ namespace ProjectPRNLamnthe180410.Services
             return user?.Coins ?? 0;
         }
 
+        public async Task UpdateHistoryAsync(History history)
+        {
+            await _userRepository.UpdateHistoryAsync(history);
+        }
+
+        public async Task<History> GetHistoryByIdAsync(int id)
+        {
+            return await _userRepository.GetHistoryByIdAsync(id);
+
+        }
+
+        public async Task AddHistoryAsync(History history)
+        {
+            await _userRepository.AddHistoryAsync(history);
+        }
+        public async Task UpdatePasswordAsync(int userId, string newPassword)
+        {
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                throw new ArgumentException("New password cannot be null or empty.", nameof(newPassword));
+            }
+
+            var user = await _userRepository.GetUserByIdAsync(userId);
+            if (user == null)
+            {
+                throw new ArgumentException($"User with ID {userId} not found.", nameof(userId));
+            }
+
+            // Hash the new password using BCrypt
+            user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+            // Update the user in the database
+            await _userRepository.UpdateUserAsync(user);
+        }
     }
 
 }

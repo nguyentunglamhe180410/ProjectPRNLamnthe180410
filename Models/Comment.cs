@@ -19,5 +19,5 @@ public partial class Comment
 
     public virtual LightNovel LightNovel { get; set; } = null!;
 
-    public virtual User? User { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
 }

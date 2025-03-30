@@ -1,4 +1,4 @@
-namespace ProjectPRNLamnthe180410.Models
+namespace WebApplication3.Models
 {
     public class ErrorViewModel
     {

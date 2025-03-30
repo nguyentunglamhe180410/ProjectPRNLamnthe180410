@@ -5,388 +5,836 @@
     Layout = "_Layout";
     var searchQuery = ViewBag.SearchQuery as string ?? "";
 }
-<meta charset="UTF-8">
-<meta name="description" content="Anime Template">
-<meta name="keywords" content="Anime, unica, creative, html">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Anime | Template</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime | Template</title>
 
-<!-- Css Styles -->
-<link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
-<link rel="stylesheet" href="~/css/plyr.css" type="text/css">
-<link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="~/css/style.css" type="text/css">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<section class="product spad">
-    <div class="container">
-        <h2>Manage Light Novels</h2>
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <form asp-action="Index" method="get" class="form-inline">
-                    <input type="text" name="searchQuery" value="@searchQuery" class="form-control mr-2" placeholder="Search by title..." />
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+    <style>
+        #chapterDescriptionContent {
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-wrap; /* Preserves whitespace and line breaks */
+        }
+    </style>
+</head>
+<body>
+    <section class="product spad">
+        <div class="container">
+            <h2>Manage Light Novels</h2>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <form asp-action="Index" method="get" class="form-inline">
+                        <input type="text" name="searchQuery" value="@searchQuery" class="form-control mr-2" placeholder="Search by title..." />
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add New Light Novel</button>
+                </div>
             </div>
-            <div class="col-md-6 text-right">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add New Light Novel</button>
-            </div>
-        </div>
-        <table class="table" id="lightNovelTable">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Episodes</th>
-                    <th>Cost</th>
-                    <th>Genre</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var ln in Model)
-                {
-                    <tr data-id="@ln.Id">
-                        <td>@ln.Title</td>
-                        <td>@ln.Episodes</td>
-                        <td>@ln.Cost</td>
-                        <td>@(ln.Genre?.Name ?? "Unknown")</td>
-                        <td>
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#editModal" onclick="fillEditForm(@ln.Id, '@ln.Title', @ln.Episodes, @ln.Cost, @ln.GenreId, '@ln.ImgUrl', '@ln.Link', @ln.Ranked, @ln.Read)">Edit</button>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" onclick="setDeleteId(@ln.Id)">Delete</button>
-                        </td>
+            <table class="table" id="lightNovelTable" style="color:white">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Episodes</th>
+                        <th>Cost</th>
+                        <th>Genre</th>
+                        <th>Actions</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-        <div class="pagination-container">
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { searchQuery, page, broadcast = true }), 
-                new PagedListRenderOptions 
-                { 
-                    LiElementClasses = new[] { "page-item" }, 
+                </thead>
+                <tbody>
+                    @foreach (var ln in Model)
+                    {
+                        <tr data-id="@ln.Id">
+                            <td>@ln.Title</td>
+                            <td>@ln.Episodes</td>
+                            <td>@ln.Cost</td>
+                            <td>@(ln.Genre?.Name ?? "Unknown")</td>
+                            <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#detailsModal" onclick="loadChapters(@ln.Id)">Details</button>
+                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal"
+                                        onclick="fillEditForm(@ln.Id, '@ln.Title','@ln.Description',@ln.Episodes,'@ln.ImgUrl',@ln.GenreId, @ln.Cost,@(ln.Status.ToString().ToLower()))">
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" onclick="setDeleteId(@ln.Id)">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { searchQuery, page, broadcast = true }),
+                         new PagedListRenderOptions
+                {
+                    LiElementClasses = new[] { "page-item" },
                     PageClasses = new[] { "page-link" },
                     DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
                     DisplayLinkToNextPage = PagedListDisplayMode.Always
                 })
+            </div>
+            <div class="mt-4">
+                <h4>Real-Time Updates</h4>
+                <ul id="updateList" class="list-group"></ul>
+            </div>
         </div>
-        <div class="mt-4">
-            <h4>Real-Time Updates</h4>
-            <ul id="updateList" class="list-group"></ul>
+    </section>
+
+    <!-- Add Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add Light Novel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form id="addForm" asp-action="Add" method="post" onsubmit="return validateAddForm()">
+                    <input type="hidden" name="searchQuery" value="@searchQuery" />
+                    <input type="hidden" name="page" value="@Model.PageNumber" />
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="addTitle">Title</label>
+                            <input name="Title" id="addTitle" class="form-control" />
+                            <span id="addTitleError" class="text-danger" style="display:none;">Title is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="addDescription">Description</label>
+                            <textarea name="Description" id="addDescription" class="form-control" rows="3"></textarea>
+                            <span id="addDescriptionError" class="text-danger" style="display:none;">Description is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="addEpisodes">Episodes</label>
+                            <input name="Episodes" id="addEpisodes" class="form-control" type="number" min="1" />
+                            <span id="addEpisodesError" class="text-danger" style="display:none;">Episodes is required and must be a positive number</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="addImgUrl">Image URL</label>
+                            <input name="ImgUrl" id="addImgUrl" class="form-control" placeholder="https://example.com/image.jpg" />
+                        </div>
+                        <div class="form-group">
+                            <label for="addGenreId">Genre</label>
+                            <select name="GenreId" id="addGenreId" class="form-control">
+                                <option value="">Select a genre</option>
+                                @foreach (var genre in ViewBag.Genres)
+                                {
+                                    <option value="@genre.Id">@genre.Name</option>
+                                }
+                            </select>
+                            <span id="addGenreIdError" class="text-danger" style="display:none;">Genre is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="addCost">Cost</label>
+                            <input name="Cost" id="addCost" class="form-control" type="number" min="0" step="0.01" />
+                            <span id="addCostError" class="text-danger" style="display:none;">Cost is required and must be a positive number</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="addStatus">Status</label>
+                            <div class="form-check">
+                                <input type="checkbox" name="Status" id="addStatus" class="form-check-input" value="true" />
+                                <label class="form-check-label" for="addStatus">Active</label>
+                            </div>
+                            <span id="addStatusError" class="text-danger" style="display:none;">Status is required</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</section>
-
-<!-- Add Modal -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Add Light Novel</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Light Novel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form id="editForm" asp-action="Edit" method="post" onsubmit="return validateEditForm()">
+                    <input type="hidden" name="searchQuery" value="@searchQuery" />
+                    <input type="hidden" name="page" value="@Model.PageNumber" />
+                    <div class="modal-body">
+                        <input type="hidden" name="Id" id="editId" />
+                        <div class="form-group">
+                            <label for="editTitle">Title</label>
+                            <input name="Title" id="editTitle" class="form-control" />
+                            <span id="editTitleError" class="text-danger" style="display:none;">Title is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDescription">Description</label>
+                            <textarea name="Description" id="editDescription" class="form-control" rows="3"></textarea>
+                            <span id="editDescriptionError" class="text-danger" style="display:none;">Description is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="editEpisodes">Episodes</label>
+                            <input name="Episodes" id="editEpisodes" class="form-control" type="number" min="1" />
+                            <span id="editEpisodesError" class="text-danger" style="display:none;">Episodes is required and must be a positive number</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="editImgUrl">Image URL</label>
+                            <input name="ImgUrl" id="editImgUrl" class="form-control" placeholder="https://example.com/image.jpg" />
+                        </div>
+                        <div class="form-group">
+                            <label for="editGenreId">Genre</label>
+                            <select name="GenreId" id="editGenreId" class="form-control">
+                                <option value="">Select a genre</option>
+                                @foreach (var genre in ViewBag.Genres)
+                                {
+                                    <option value="@genre.Id">@genre.Name</option>
+                                }
+                            </select>
+                            <span id="editGenreIdError" class="text-danger" style="display:none;">Genre is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCost">Cost</label>
+                            <input name="Cost" id="editCost" class="form-control" type="number" min="0" step="0.01" />
+                            <span id="editCostError" class="text-danger" style="display:none;">Cost is required and must be a positive number</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="editStatus">Status</label>
+                            <div class="form-check">
+                                <input type="checkbox" name="Status" id="editStatus" class="form-check-input" value="true" />
+                                <label class="form-check-label" for="editStatus">Active</label>
+                            </div>
+                            <span id="editStatusError" class="text-danger" style="display:none;">Status is required</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
             </div>
-            <form id="addForm" asp-action="Add" method="post" onsubmit="return validateAddForm()">
-                <input type="hidden" name="searchQuery" value="@searchQuery" />
-                <input type="hidden" name="page" value="@Model.PageNumber" />
+        </div>
+    </div>
+
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Light Novel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" name="searchQuery" value="@searchQuery" />
+                    <input type="hidden" name="page" value="@Model.PageNumber" />
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="deleteId" />
+                        <p>Are you sure you want to delete this light novel? This action cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Light Novel Chapters</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input name="Title" id="addTitle" class="form-control" />
-                        <span id="addTitleError" class="text-danger" style="display:none;">Title is required</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Episodes</label>
-                        <input name="Episodes" id="addEpisodes" class="form-control" type="number" />
-                        <span id="addEpisodesError" class="text-danger" style="display:none;">Episodes is required and must be a positive number</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Cost</label>
-                        <input name="Cost" id="addCost" class="form-control" type="number" />
-                        <span id="addCostError" class="text-danger" style="display:none;">Cost is required and must be a positive number</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Genre</label>
-                        <select name="GenreId" id="addGenreId" class="form-control">
-                            @foreach (var genre in ViewBag.Genres)
-                            {
-                                <option value="@genre.Id">@genre.Name</option>
-                            }
-                        </select>
-                        <span id="addGenreIdError" class="text-danger" style="display:none;">Genre is required</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Image URL</label>
-                        <input name="ImgUrl" id="addImgUrl" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Link</label>
-                        <input name="Link" id="addLink" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Ranked</label>
-                        <input name="Ranked" id="addRanked" class="form-control" type="number" />
-                    </div>
-                    <div class="form-group">
-                        <label>Read Count</label>
-                        <input name="Read" id="addRead" class="form-control" type="number" />
-                    </div>
+                    <input type="hidden" id="detailsLightNovelId" />
+                    <h6>Chapters</h6>
+                    <table class="table" id="chapterTable">
+                        <thead>
+                            <tr>
+                                <th>Chapter Number</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="chapterTableBody">
+                            <!-- Chapters will be loaded dynamically via JavaScript -->
+                        </tbody>
+                    </table>
+                    <h6>Add New Chapter</h6>
+                    <form id="addChapterForm" onsubmit="return addChapter(event)">
+                        <input type="hidden" name="LightNovelId" id="addChapterLightNovelId" />
+                        <div class="form-group">
+                            <label for="addChapterNumber">Chapter Number</label>
+                            <input name="Chapter1" id="addChapterNumber" class="form-control" type="number" min="1" />
+                            <span id="addChapterNumberError" class="text-danger" style="display:none;">Chapter number is required and must be a positive number</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="addChapterDescription">Description</label>
+                            <textarea name="Description" id="addChapterDescription" class="form-control" rows="5" placeholder="Enter chapter description..."></textarea>
+                            <span id="addChapterDescriptionError" class="text-danger" style="display:none;">Description is required</span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Chapter</button>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Light Novel</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+    <!-- Edit Chapter Modal -->
+    <div class="modal fade" id="editChapterModal" tabindex="-1" role="dialog" aria-labelledby="editChapterModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editChapterModalLabel">Edit Chapter</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="editChapterForm" onsubmit="return editChapter(event)">
+                    <input type="hidden" name="Id" id="editChapterId" />
+                    <input type="hidden" name="LightNovelId" id="editChapterLightNovelId" />
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="editChapterNumber">Chapter Number</label>
+                            <input name="Chapter1" id="editChapterNumber" class="form-control" type="number" min="1" />
+                            <span id="editChapterNumberError" class="text-danger" style="display:none;">Chapter number is required and must be a positive number</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="editChapterDescription">Description</label>
+                            <textarea name="Description" id="editChapterDescription" class="form-control" rows="5" placeholder="Enter chapter description..."></textarea>
+                            <span id="editChapterDescriptionError" class="text-danger" style="display:none;">Description is required</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
             </div>
-            <form id="editForm" asp-action="Edit" method="post" onsubmit="return validateEditForm()">
-                <input type="hidden" name="searchQuery" value="@searchQuery" />
-                <input type="hidden" name="page" value="@Model.PageNumber" />
-                <div class="modal-body">
-                    <input type="hidden" name="Id" id="editId" />
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input name="Title" id="editTitle" class="form-control" />
-                        <span id="editTitleError" class="text-danger" style="display:none;">Title is required</span>
+        </div>
+    </div>
+
+    <!-- Delete Chapter Modal -->
+    <div class="modal fade" id="deleteChapterModal" tabindex="-1" role="dialog" aria-labelledby="deleteChapterModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteChapterModalLabel">Delete Chapter</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="deleteChapterForm" onsubmit="return deleteChapter(event)">
+                    <div class="modal-body">
+                        <input type="hidden" id="deleteChapterId" />
+                        <p>Are you sure you want to delete this chapter? This action cannot be undone.</p>
                     </div>
-                    <div class="form-group">
-                        <label>Episodes</label>
-                        <input name="Episodes" id="editEpisodes" class="form-control" type="number" />
-                        <span id="editEpisodesError" class="text-danger" style="display:none;">Episodes is required and must be a positive number</span>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </div>
-                    <div class="form-group">
-                        <label>Cost</label>
-                        <input name="Cost" id="editCost" class="form-control" type="number" />
-                        <span id="editCostError" class="text-danger" style="display:none;">Cost is required and must be a positive number</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Genre</label>
-                        <select name="GenreId" id="editGenreId" class="form-control">
-                            @foreach (var genre in ViewBag.Genres)
-                            {
-                                <option value="@genre.Id">@genre.Name</option>
-                            }
-                        </select>
-                        <span id="editGenreIdError" class="text-danger" style="display:none;">Genre is required</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Image URL</label>
-                        <input name="ImgUrl" id="editImgUrl" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Link</label>
-                        <input name="Link" id="editLink" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Ranked</label>
-                        <input name="Ranked" id="editRanked" class="form-control" type="number" />
-                    </div>
-                    <div class="form-group">
-                        <label>Read Count</label>
-                        <input name="Read" id="editRead" class="form-control" type="number" />
-                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Description Modal -->
+    <div class="modal fade" id="viewDescriptionModal" tabindex="-1" role="dialog" aria-labelledby="viewDescriptionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewDescriptionModalLabel">Chapter Description</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                    <p id="chapterDescriptionContent"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete Light Novel</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
             </div>
-            <form asp-action="Delete" method="post">
-                <input type="hidden" name="searchQuery" value="@searchQuery" />
-                <input type="hidden" name="page" value="@Model.PageNumber" />
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="deleteId" />
-                    <p>Are you sure you want to delete this light novel?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    <script src="~/js/jquery-3.3.1.min.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
-    <script>
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/lightNovelHub")
-            .build();
+    @section Scripts {
+        <script src="~/js/jquery-3.3.1.min.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+        <script>
+            // SignalR Connection Setup
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/lightNovelHub")
+                .build();
 
-        // Track the last processed update to prevent loops
-        let lastUpdate = { searchQuery: '@searchQuery', page: @Model.PageNumber, timestamp: 0 };
+            // Track the last processed update to prevent loops
+            let lastUpdate = { searchQuery: '@searchQuery', page: @Model.PageNumber, timestamp: 0 };
 
-        // Handle CRUD updates
-        connection.on("ReceiveUpdate", (message) => {
-            const li = document.createElement("li");
-            li.className = "list-group-item";
-            document.getElementById("updateList").prepend(li);
-
-            // Close all modals
-            $('#addModal').modal('hide');
-            $('#editModal').modal('hide');
-            $('#deleteModal').modal('hide');
-
-            // Refresh with current state
-            refreshPage('@searchQuery', @Model.PageNumber);
-        });
-
-        // Handle search and page updates
-        connection.on("ReceivePageUpdate", (searchQuery, page) => {
-            const now = Date.now();
-            const updateKey = `${searchQuery}-${page}`;
-
-            // Only process if it's a new update (different query/page or newer timestamp)
-            if (updateKey !== `${lastUpdate.searchQuery}-${lastUpdate.page}` || now > lastUpdate.timestamp + 1000) {
+            // Handle CRUD updates
+            connection.on("ReceiveUpdate", (message) => {
                 const li = document.createElement("li");
                 li.className = "list-group-item";
+                li.textContent = message;
                 document.getElementById("updateList").prepend(li);
 
-                lastUpdate = { searchQuery, page, timestamp: now };
-                refreshPage(searchQuery, page);
+                // Close modals except the "Details" modal
+                $('#addModal').modal('hide');
+                $('#editModal').modal('hide');
+                $('#deleteModal').modal('hide');
+                $('#editChapterModal').modal('hide');
+                $('#deleteChapterModal').modal('hide');
+                $('#viewDescriptionModal').modal('hide');
+
+                refreshPage('@searchQuery', @Model.PageNumber);
+            });
+
+            // Handle search and page updates
+            connection.on("ReceivePageUpdate", (searchQuery, page) => {
+                const now = Date.now();
+                const updateKey = `${searchQuery}-${page}`;
+
+                // Only process if it's a new update (different query/page or newer timestamp)
+                if (updateKey !== `${lastUpdate.searchQuery}-${lastUpdate.page}` || now > lastUpdate.timestamp + 1000) {
+                    const li = document.createElement("li");
+                    li.className = "list-group-item";
+                    li.textContent = `Page updated: ${searchQuery} - Page ${page}`;
+                    document.getElementById("updateList").prepend(li);
+
+                    lastUpdate = { searchQuery, page, timestamp: now };
+                    refreshPage(searchQuery, page);
+                }
+            });
+
+            connection.start().catch(err => console.error('SignalR Connection Error:', err));
+
+            // Function to refresh the page
+            function refreshPage(searchQuery, page) {
+                fetch(`/Admin/LightNovel/Index?searchQuery=${encodeURIComponent(searchQuery)}&page=${page}`)
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const newTable = doc.querySelector('#lightNovelTable');
+                        const newPagination = doc.querySelector('.pagination-container');
+                        document.querySelector('#lightNovelTable').outerHTML = newTable.outerHTML;
+                        document.querySelector('.pagination-container').outerHTML = newPagination.outerHTML;
+
+                        // Update search input
+                        document.querySelector('input[name="searchQuery"]').value = searchQuery;
+                    })
+                    .catch(err => console.error('Error refreshing page:', err));
             }
-        });
 
-        connection.start().catch(err => console.error(err));
+            // Fill the Edit Light Novel form
+            function fillEditForm(id, title, description, episodes, imgUrl, genreId, cost, status) {
+                console.log("ID:", id);
+                console.log("Title:", title);
+                console.log("Description:", description);
+                console.log("Episodes:", episodes);
+                console.log("ImgUrl:", imgUrl);
+                console.log("GenreId:", genreId);
+                console.log("Cost:", cost);
+                console.log("Status:", status);
+                document.getElementById('editId').value = id;
+                document.getElementById('editTitle').value = title;
+                document.getElementById('editDescription').value = description;
+                document.getElementById('editEpisodes').value = episodes;
+                document.getElementById('editImgUrl').value = imgUrl || '';
+                document.getElementById('editGenreId').value = genreId;
+                document.getElementById('editCost').value = cost || '';
 
-        function refreshPage(searchQuery, page) {
-            fetch(`/Admin/LightNovel/Index?searchQuery=${encodeURIComponent(searchQuery)}&page=${page}`)
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const newTable = doc.querySelector('#lightNovelTable');
-                    const newPagination = doc.querySelector('.pagination-container');
-                    document.querySelector('#lightNovelTable').outerHTML = newTable.outerHTML;
-                    document.querySelector('.pagination-container').outerHTML = newPagination.outerHTML;
+                // Ensure status is correctly set as a checkbox
+                document.getElementById('editStatus').checked = (status === "true" || status === true || status == 1);
+            }
 
-                    // Update search input
-                    document.querySelector('input[name="searchQuery"]').value = searchQuery;
+
+            // Set the ID for deletion
+            function setDeleteId(id) {
+                document.getElementById('deleteId').value = id;
+                Console.log(id);
+            }
+
+            // Validate the Add Light Novel form
+            function validateAddForm() {
+                let isValid = true;
+
+                // Reset error messages
+                document.getElementById('addTitleError').style.display = 'none';
+                document.getElementById('addDescriptionError').style.display = 'none';
+                document.getElementById('addEpisodesError').style.display = 'none';
+                document.getElementById('addGenreIdError').style.display = 'none';
+                document.getElementById('addCostError').style.display = 'none';
+                document.getElementById('addStatusError').style.display = 'none';
+
+                // Title validation
+                const title = document.getElementById('addTitle').value.trim();
+                if (!title) {
+                    document.getElementById('addTitleError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Description validation (optional, remove if not required)
+                const description = document.getElementById('addDescription').value.trim();
+                if (!description) {
+                    document.getElementById('addDescriptionError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Episodes validation
+                const episodes = document.getElementById('addEpisodes').value;
+                if (!episodes || episodes <= 0) {
+                    document.getElementById('addEpisodesError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Genre validation
+                const genreId = document.getElementById('addGenreId').value;
+                if (!genreId) {
+                    document.getElementById('addGenreIdError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Cost validation
+                const cost = document.getElementById('addCost').value;
+                if (!cost || cost < 0) {
+                    document.getElementById('addCostError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Status is a checkbox, so it’s always valid (true or false)
+                // Uncomment below if you want to require it to be checked (true)
+                // const status = document.getElementById('addStatus').checked;
+                // if (!status) {
+                //     document.getElementById('addStatusError').style.display = 'block';
+                //     isValid = false;
+                // }
+
+                return isValid;
+            }
+
+            // Validate the Edit Light Novel form
+            function validateEditForm() {
+                let isValid = true;
+
+                // Reset error messages
+                document.getElementById('editTitleError').style.display = 'none';
+                document.getElementById('editDescriptionError').style.display = 'none';
+                document.getElementById('editEpisodesError').style.display = 'none';
+                document.getElementById('editGenreIdError').style.display = 'none';
+                document.getElementById('editCostError').style.display = 'none';
+                document.getElementById('editStatusError').style.display = 'none';
+
+                // Title validation
+                const title = document.getElementById('editTitle').value.trim();
+                if (!title) {
+                    document.getElementById('editTitleError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Description validation (optional, remove if not required)
+                const description = document.getElementById('editDescription').value.trim();
+                if (!description) {
+                    document.getElementById('editDescriptionError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Episodes validation
+                const episodes = document.getElementById('editEpisodes').value;
+                if (!episodes || episodes <= 0) {
+                    document.getElementById('editEpisodesError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Genre validation
+                const genreId = document.getElementById('editGenreId').value;
+                if (!genreId) {
+                    document.getElementById('editGenreIdError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Cost validation
+                const cost = document.getElementById('editCost').value;
+                if (!cost || cost < 0) {
+                    document.getElementById('editCostError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Status is a checkbox, so it’s always valid (true or false)
+                // Uncomment below if you want to require it to be checked (true)
+                // const status = document.getElementById('editStatus').checked;
+                // if (!status) {
+                //     document.getElementById('editStatusError').style.display = 'block';
+                //     isValid = false;
+                // }
+
+                return isValid;
+            }
+
+            function loadChapters(lightNovelId) {
+                document.getElementById('detailsLightNovelId').value = lightNovelId;
+                document.getElementById('addChapterLightNovelId').value = lightNovelId;
+
+                fetch(`/Admin/LightNovel/GetChapters?lightNovelId=${lightNovelId}`)
+                    .then(response => response.json())
+                    .then(chapters => {
+                        console.log('Chapters fetched:', chapters); // Debug the response
+                        const tbody = document.getElementById('chapterTableBody');
+                        tbody.innerHTML = '';
+                        if (chapters.length === 0) {
+                            tbody.innerHTML = '<tr><td colspan="3" class="text-center">No chapters available.</td></tr>';
+                        } else {
+                            chapters.forEach(chapter => {
+                                const tr = document.createElement('tr');
+                                tr.innerHTML = `
+                                                                                    <td>${chapter.chapter1}</td>
+                                                                                    <td>
+                                                                                        <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#viewDescriptionModal" data-description="${encodeURIComponent(chapter.description || 'No description')}" onclick="viewDescription(this)">View Description</button>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editChapterModal" onclick="fillEditChapterForm(${chapter.id}, ${chapter.chapter1}, '${encodeURIComponent(chapter.description || '')}', ${chapter.lightNovelId})">Edit</button>
+                                                                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteChapterModal" onclick="setDeleteChapterId(${chapter.id})">Delete</button>
+                                                                                    </td>
+                                                                                `;
+                                tbody.appendChild(tr);
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error loading chapters:', err);
+                        const tbody = document.getElementById('chapterTableBody');
+                        tbody.innerHTML = '<tr><td colspan="3" class="text-center text-danger">Error loading chapters.</td></tr>';
+                    });
+            }
+
+            // Display chapter description in the modal
+            function viewDescription(button) {
+                const description = decodeURIComponent(button.getAttribute('data-description'));
+                const descriptionContent = document.getElementById('chapterDescriptionContent');
+                // Escape HTML to prevent XSS, then replace newlines with <br>
+                const escapedDescription = description
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/\n/g, '<br>');
+                descriptionContent.innerHTML = escapedDescription;
+            }
+
+            // Fill the Edit Chapter form
+            function fillEditChapterForm(id, chapter1, description, lightNovelId) {
+                document.getElementById('editChapterId').value = id;
+                document.getElementById('editChapterNumber').value = chapter1;
+                document.getElementById('editChapterDescription').value = decodeURIComponent(description);
+                document.getElementById('editChapterLightNovelId').value = lightNovelId;
+            }
+
+            // Set the chapter ID for deletion
+            function setDeleteChapterId(id) {
+                document.getElementById('deleteChapterId').value = id;
+                console.log("Deleting chapter ID:", id);
+            }
+
+            // Add a new chapter
+            function addChapter(event) {
+                event.preventDefault();
+
+                document.getElementById('addChapterNumberError').style.display = 'none';
+                document.getElementById('addChapterDescriptionError').style.display = 'none';
+
+                const lightNovelId = document.getElementById('addChapterLightNovelId').value;
+                const chapterNumber = document.getElementById('addChapterNumber').value;
+                const description = document.getElementById('addChapterDescription').value.trim();
+
+                let isValid = true;
+
+                if (!chapterNumber || chapterNumber <= 0) {
+                    document.getElementById('addChapterNumberError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!description) {
+                    document.getElementById('addChapterDescriptionError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!isValid) return false;
+
+                const formData = new FormData();
+                formData.append('LightNovelId', lightNovelId);
+                formData.append('Chapter1', chapterNumber);
+                formData.append('Description', description);
+
+                fetch('/Admin/LightNovel/AddChapter', {
+                    method: 'POST',
+                    body: formData
                 })
-                .catch(err => console.error('Error refreshing page:', err));
-        }
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            // Clear form
+                            document.getElementById('addChapterNumber').value = '';
+                            document.getElementById('addChapterDescription').value = '';
+                            // Reload chapters
+                            loadChapters(lightNovelId);
+                        } else {
+                            alert('Error adding chapter: ' + result.message);
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error adding chapter:', err);
+                        alert('An error occurred while adding the chapter.');
+                    });
 
-        function fillEditForm(id, title, episodes, cost, genreId, imgUrl, link, ranked, read) {
-            document.getElementById('editId').value = id;
-            document.getElementById('editTitle').value = title;
-            document.getElementById('editEpisodes').value = episodes;
-            document.getElementById('editCost').value = cost;
-            document.getElementById('editGenreId').value = genreId;
-            document.getElementById('editImgUrl').value = imgUrl || '';
-            document.getElementById('editLink').value = link || '';
-            document.getElementById('editRanked').value = ranked || '';
-            document.getElementById('editRead').value = read || '';
-        }
-
-        function setDeleteId(id) {
-            document.getElementById('deleteId').value = id;
-        }
-
-        function validateAddForm() {
-            let isValid = true;
-
-            document.getElementById('addTitleError').style.display = 'none';
-            document.getElementById('addEpisodesError').style.display = 'none';
-            document.getElementById('addCostError').style.display = 'none';
-            document.getElementById('addGenreIdError').style.display = 'none';
-
-            const title = document.getElementById('addTitle').value.trim();
-            if (!title) {
-                document.getElementById('addTitleError').style.display = 'block';
-                isValid = false;
+                return false;
             }
 
-            const episodes = document.getElementById('addEpisodes').value;
-            if (!episodes || episodes <= 0) {
-                document.getElementById('addEpisodesError').style.display = 'block';
-                isValid = false;
+            // Edit an existing chapter
+            function editChapter(event) {
+                event.preventDefault();
+
+                document.getElementById('editChapterNumberError').style.display = 'none';
+                document.getElementById('editChapterDescriptionError').style.display = 'none';
+
+                const id = document.getElementById('editChapterId').value;
+                let lightNovelId = document.getElementById('editChapterLightNovelId').value;
+                const chapterNumber = document.getElementById('editChapterNumber').value;
+                const description = document.getElementById('editChapterDescription').value.trim();
+
+                let isValid = true;
+
+                lightNovelId = parseInt(lightNovelId, 10);
+                if (isNaN(lightNovelId) || lightNovelId <= 0) {
+                    lightNovelId = parseInt(document.getElementById('detailsLightNovelId').value, 10);
+                    if (isNaN(lightNovelId) || lightNovelId <= 0) {
+                        alert('Error: Invalid Light Novel ID. Please try again.');
+                        return false;
+                    }
+                }
+
+                if (!chapterNumber || chapterNumber <= 0) {
+                    document.getElementById('editChapterNumberError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!description) {
+                    document.getElementById('editChapterDescriptionError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!isValid) return false;
+
+                const formData = new FormData();
+                formData.append('Id', id);
+                formData.append('LightNovelId', lightNovelId);
+                formData.append('Chapter1', chapterNumber);
+                formData.append('Description', description);
+
+                fetch('/Admin/LightNovel/EditChapter', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            loadChapters(lightNovelId);
+                            $('#editChapterModal').modal('hide');
+                        } else {
+                            alert('Error updating chapter: ' + result.message);
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error updating chapter:', err);
+                        alert('An error occurred while updating the chapter.');
+                    });
+
+                return false;
             }
 
-            const cost = document.getElementById('addCost').value;
-            if (!cost || cost <= 0) {
-                document.getElementById('addCostError').style.display = 'block';
-                isValid = false;
+            // Delete a chapter
+            function deleteChapter(event) {
+                event.preventDefault();
+
+                const id = document.getElementById('deleteChapterId').value;
+                const lightNovelId = document.getElementById('detailsLightNovelId').value;
+
+                console.log('Deleting chapter with ID:', id);
+
+                // Validate the chapter ID
+                const chapterId = parseInt(id, 10);
+                if (isNaN(chapterId) || chapterId <= 0) {
+                    console.error('Invalid chapter ID:', id);
+                    alert('Error: Invalid chapter ID. Please try again.');
+                    return false;
+                }
+
+                // Validate lightNovelId
+                const novelId = parseInt(lightNovelId, 10);
+                console.log('Light novel ID as Int:', novelId); // Fixed log message
+
+                if (isNaN(novelId) || novelId <= 0) {
+                    console.error('Invalid light novel ID:', lightNovelId);
+                    alert('Error: Invalid light novel ID. Please try again.');
+                    return false;
+                }
+
+                const url = `/Admin/LightNovel/DeleteChapter/${chapterId}`;
+                console.log('Fetching URL:', url);
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json' // Still included, though optional without a body
+                    }
+                    // No body needed since id is in the URL
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            // Reload chapters
+                            loadChapters(novelId);
+                            // Close the modal
+                            $('#deleteChapterModal').modal('hide');
+                        } else {
+                            alert('Error deleting chapter: ' + result.message);
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error deleting chapter:', err);
+                        alert('An error occurred while deleting the chapter.');
+                    });
+
+                return false;
             }
-
-            const genreId = document.getElementById('addGenreId').value;
-            if (!genreId) {
-                document.getElementById('addGenreIdError').style.display = 'block';
-                isValid = false;
-            }
-
-            return isValid;
-        }
-
-        function validateEditForm() {
-            let isValid = true;
-
-            document.getElementById('editTitleError').style.display = 'none';
-            document.getElementById('editEpisodesError').style.display = 'none';
-            document.getElementById('editCostError').style.display = 'none';
-            document.getElementById('editGenreIdError').style.display = 'none';
-
-            const title = document.getElementById('editTitle').value.trim();
-            if (!title) {
-                document.getElementById('editTitleError').style.display = 'block';
-                isValid = false;
-            }
-
-            const episodes = document.getElementById('editEpisodes').value;
-            if (!episodes || episodes <= 0) {
-                document.getElementById('editEpisodesError').style.display = 'block';
-                isValid = false;
-            }
-
-            const cost = document.getElementById('editCost').value;
-            if (!cost || cost <= 0) {
-                document.getElementById('editCostError').style.display = 'block';
-                isValid = false;
-            }
-
-            const genreId = document.getElementById('editGenreId').value;
-            if (!genreId) {
-                document.getElementById('editGenreIdError').style.display = 'block';
-                isValid = false;
-            }
-
-            return isValid;
-        }
-    </script>
-}
+        </script>
+    }
+</body>
+</html>

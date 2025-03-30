@@ -17,6 +17,8 @@ public partial class AnimeLightNovelContext : DbContext
 
     public virtual DbSet<Bought> Boughts { get; set; }
 
+    public virtual DbSet<Chapter> Chapters { get; set; }
+
     public virtual DbSet<Comment> Comments { get; set; }
 
     public virtual DbSet<Genre> Genres { get; set; }
@@ -56,6 +58,19 @@ public partial class AnimeLightNovelContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Boughts)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__Bought__UserID__52593CB8");
+        });
+
+        modelBuilder.Entity<Chapter>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Chapter__3214EC076D2D1D23");
+
+            entity.ToTable("Chapter");
+
+            entity.Property(e => e.Chapter1).HasColumnName("Chapter");
+
+            entity.HasOne(d => d.LightNovel).WithMany(p => p.Chapters)
+                .HasForeignKey(d => d.LightNovelId)
+                .HasConstraintName("FK__Chapter__LightNo__02FC7413");
         });
 
         modelBuilder.Entity<Comment>(entity =>

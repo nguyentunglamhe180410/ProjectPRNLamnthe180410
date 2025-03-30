@@ -38,7 +38,17 @@ namespace ProjectPRNLamnthe180410.Repositories
 
         public async Task AddAsync(LightNovel lightNovel)
         {
+            // Set default values before saving
+            lightNovel.Aired = DateOnly.FromDateTime(DateTime.Now);
+            lightNovel.Read = 0;
+            lightNovel.Ranked = 0;
             await _context.LightNovels.AddAsync(lightNovel);
+            await _context.SaveChangesAsync();
+
+            // After saving, set the Link with the generated ID
+            lightNovel.Link = $"https://localhost:7247/Details/Index/{lightNovel.Id}";
+
+            // Save again to persist the updated Link
             await _context.SaveChangesAsync();
         }
 
@@ -187,6 +197,7 @@ namespace ProjectPRNLamnthe180410.Repositories
             await _context.Boughts.AddAsync(purchase);
             await _context.SaveChangesAsync();
         }
+
 
     }
 }

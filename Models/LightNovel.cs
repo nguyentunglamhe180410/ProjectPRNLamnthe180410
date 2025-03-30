@@ -33,6 +33,8 @@ public partial class LightNovel
 
     public virtual ICollection<Bought> Boughts { get; set; } = new List<Bought>();
 
+    public virtual ICollection<Chapter> Chapters { get; set; } = new List<Chapter>();
+
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
     public virtual Genre Genre { get; set; } = null!;

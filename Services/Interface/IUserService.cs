@@ -16,7 +16,10 @@ namespace ProjectPRNLamnthe180410.Services.Interface
         Task ChangeProfilePictureAsync(int userId, string profilePictureUrl);
         Task<bool> HasUserBoughtLightNovelAsync(int userId, int lightNovelId);
         Task<int> GetUserCoinsAsync(int id);
-
+        Task UpdateHistoryAsync(History history);
+        Task<History> GetHistoryByIdAsync(int id);
+        Task AddHistoryAsync(History history);
+        Task UpdatePasswordAsync(int userId, string newPassword);
     }
 
 }

@@ -72,7 +72,7 @@
                             <button type="submit" class="site-btn">Login Now</button>
                         </form>
 
-                        <a asp-action="ForgotPassword" asp-controller="Login" class="forget_pass">Forgot Your Password?</a>
+                        <a asp-action="Index" asp-controller="ChangePassword" class="forget_pass">Forgot Your Password?</a>
                     </div>
                 </div>
 
@@ -98,35 +98,8 @@
                                     @ViewData["Error"]
                                 </div>
                             }
-                            <button type="submit" class="site-btn">Regiester Now</button>
+                            <button type="submit" class="site-btn">Register Now</button>
                         </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="login__social">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="login__social__links">
-                            <span>or</span>
-                            <ul>
-                                <li>
-                                    <a href="/Login/ExternalLogin?provider=Facebook" class="facebook">
-                                        <i class="fa fa-facebook"></i> Sign in With Facebook
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/Login/ExternalLogin?provider=Google" class="google">
-                                        <i class="fa fa-google"></i> Sign in With Google
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/Login/ExternalLogin?provider=Twitter" class="twitter">
-                                        <i class="fa fa-twitter"></i> Sign in With Twitter
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>

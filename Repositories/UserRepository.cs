@@ -70,6 +70,24 @@ namespace ProjectPRNLamnthe180410.Repositories
             return await _context.Boughts
                 .AnyAsync(p => p.UserId == userId && p.TitleId == lightNovelId);
         }
+
+        public async Task UpdateHistoryAsync(History history)
+        {
+            _context.Histories.Update(history);
+            await SaveChangesAsync();
+        }
+
+        public async Task<History> GetHistoryByIdAsync(int id)
+        {
+            return await _context.Histories.FirstOrDefaultAsync(u => u.Id == id);
+
+        }
+
+        public async Task AddHistoryAsync(History history)
+        {
+            await _context.Histories.AddAsync(history);
+            await SaveChangesAsync();
+        }
     }
 
 }

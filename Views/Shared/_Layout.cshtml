@@ -58,7 +58,7 @@
                                     <ul class="dropdown">
                                         <span id="authLinks" style="@(isLoggedIn ? "display:block;" : "display:none;")">
                                         <li><a asp-controller="Profile" asp-action="Index">Profile</a></li>
-                                        <li><a asp-controller="" asp-action="Details">Buy Coins</a></li>
+                                        <li><a asp-controller="Buy" asp-action="Index">Buy Coins</a></li>
                                         <li id="logoutLink"><a asp-controller="Login" asp-action="Logout">Logout</a></li>
                                         </span>
                                         <span id="guestLinks" style="@(isLoggedIn ? "display:none;" : "display:block;")">

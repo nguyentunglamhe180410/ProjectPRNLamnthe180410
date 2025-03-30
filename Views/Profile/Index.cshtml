@@ -1,9 +1,12 @@
-﻿@{
+﻿@model ProjectPRNLamnthe180410.Models.User
+
+@{
     ViewData["Title"] = "User Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var user = ViewData["User"] as ProjectPRNLamnthe180410.Models.User;
 }
 
+<!-- Meta Tags -->
 <meta charset="UTF-8">
 <meta name="description" content="Anime Template">
 <meta name="keywords" content="Anime, unica, creative, html">
@@ -15,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<!-- Css Styles -->
+<!-- CSS Styles -->
 <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
 <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
@@ -25,41 +28,220 @@
 <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="~/css/style.css" type="text/css">
 
-<section class="product spad">
-    <div class="container">
+<!-- Custom CSS for Profile Page -->
+<style>
+    body {
+        background-color: #0b0c2a;
+        color: #ffffff;
+        font-family: 'Mulish', sans-serif;
+    }
+
+    .profile-section {
+        padding: 50px 0;
+    }
+
+    .profile-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+        .profile-container h2 {
+            color: #ffffff;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+    .profile-card {
+        background-color: #1a1b3a;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .profile-image {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+        border-bottom: 2px solid #e53637;
+    }
+
+    .profile-card-body {
+        padding: 20px;
+        text-align: center;
+    }
+
+        .profile-card-body h5 {
+            color: #ffffff;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+    .btn-primary {
+        background-color: #e53637;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #c72e2f;
+        }
+
+    .details-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        color: #333;
+    }
+
+        .details-card h5 {
+            color: #333;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .details-card dl dt {
+            color: #666;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .details-card dl dd {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+    .updates-section h4 {
+        color: #ffffff;
+        font-family: 'Oswald', sans-serif;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .list-group-item {
+        background-color: #1a1b3a;
+        color: #ffffff;
+        border: 1px solid #3a3b5a;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    /* Modal Styling */
+    .modal-content {
+        background-color: #1a1b3a;
+        color: #ffffff;
+        border-radius: 10px;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #3a3b5a;
+    }
+
+        .modal-header h5 {
+            color: #ffffff;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .modal-header .close {
+            color: #ffffff;
+            opacity: 0.8;
+        }
+
+            .modal-header .close:hover {
+                opacity: 1;
+            }
+
+    .modal-body .form-group label {
+        color: #b7b7b7;
+        font-size: 14px;
+    }
+
+    .modal-body .form-control {
+        background-color: #2a2b4a;
+        border: 1px solid #3a3b5a;
+        color: #ffffff;
+        border-radius: 5px;
+    }
+
+        .modal-body .form-control:focus {
+            border-color: #e53637;
+            box-shadow: 0 0 5px rgba(229, 54, 55, 0.5);
+        }
+
+    .modal-body .form-text {
+        color: #b7b7b7;
+    }
+
+    .modal-body .text-danger {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .modal-footer {
+        border-top: 1px solid #3a3b5a;
+    }
+
+        .modal-footer .btn-secondary {
+            background-color: #3a3b5a;
+            border: none;
+        }
+
+            .modal-footer .btn-secondary:hover {
+                background-color: #4a4b6a;
+            }
+</style>
+
+<!-- Profile Section -->
+<section class="profile-section">
+    <div class="container profile-container">
         <h2>User Profile</h2>
         <div class="row">
             <div class="col-lg-4 col-md-4">
-                <div class="card">
-                    <img src="@(user.ProfilePicture ?? "/img/default-profile.png")" class="card-img-top" alt="Profile Picture" style="max-height: 300px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">@user.Username</h5>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit Profile</button>
+                <div class="profile-card">
+                    <img src="@(user.ProfilePicture ?? "/img/default-profile.png")" class="profile-image" alt="Profile Picture">
+                    <div class="profile-card-body">
+                        <h5>@user.Username</h5>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit Profile</button>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <a class="btn btn-primary" href="/ChangePassword">Change Password</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-8 col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Details</h5>
-                        <dl class="row">
-                            <dt class="col-sm-3">Username</dt>
-                            <dd class="col-sm-9">@user.Username</dd>
+                <div class="details-card">
+                    <h5>Details</h5>
+                    <dl class="row">
+                        <dt class="col-sm-3">Username</dt>
+                        <dd class="col-sm-9">@user.Username</dd>
 
-                            <dt class="col-sm-3">Email</dt>
-                            <dd class="col-sm-9">@user.Email</dd>
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9">@user.Email</dd>
 
-                            <dt class="col-sm-3">Coins</dt>
-                            <dd class="col-sm-9">@(user.Coins.HasValue ? user.Coins.Value.ToString() : "0")</dd>
+                        <dt class="col-sm-3">Coins</dt>
+                        <dd class="col-sm-9">@(user.Coins.HasValue ? user.Coins.Value.ToString("N0") : "0")</dd>
 
-                            <dt class="col-sm-3">Description</dt>
-                            <dd class="col-sm-9">@(user.Description ?? "No description provided.")</dd>
-                        </dl>
-                    </div>
+                        <dt class="col-sm-3">Description</dt>
+                        <dd class="col-sm-9">@(user.Description ?? "No description provided.")</dd>
+                    </dl>
                 </div>
             </div>
         </div>
-        <div class="mt-4">
+        <div class="updates-section mt-4">
             <h4>Real-Time Updates</h4>
             <ul id="updateList" class="list-group"></ul>
         </div>
@@ -73,19 +255,19 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form id="editForm" asp-controller="Profile" asp-action="Edit" method="post" enctype="multipart/form-data" onsubmit="return validateEditForm()">
                 <input type="hidden" name="Id" value="@user.Id" />
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Description</label>
+                        <label for="editDescription">Description</label>
                         <input name="Description" id="editDescription" class="form-control" value="@user.Description" />
                         <span id="editDescriptionError" class="text-danger" style="display:none;">Description is required</span>
                     </div>
                     <div class="form-group">
-                        <label>Profile Picture</label>
+                        <label for="editProfilePicture">Profile Picture</label>
                         <input type="file" name="profilePicture" id="editProfilePicture" class="form-control-file" accept="image/*" />
                         <small class="form-text text-muted">Current: @(user.ProfilePicture ?? "None")</small>
                     </div>

@@ -95,5 +95,10 @@ namespace ProjectPRNLamnthe180410.Services
         {
             await _lightNovelRepository.RecordPurchaseAsync(userId, id);
         }
+        public async Task UpdateRead(LightNovel lightNovel)
+        {
+            lightNovel.Read++;
+            await _lightNovelRepository.UpdateAsync(lightNovel);
+        }
     }
 }

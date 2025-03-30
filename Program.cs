@@ -19,6 +19,7 @@ builder.Services.AddScoped<ILightNovelRepository, LightNovelRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
 
 
 
@@ -28,7 +29,8 @@ builder.Services.AddScoped<ILightNovelService, LightNovelService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
-
+builder.Services.AddScoped<IVnPayService, VnPayService>();
+builder.Services.AddScoped<IChapterService, ChapterService>();
 
 
 

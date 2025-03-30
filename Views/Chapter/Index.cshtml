@@ -1,0 +1,89 @@
+﻿@model ProjectPRNLamnthe180410.Models.Chapter
+@{
+    ViewData["Title"] = "Read Chapter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lightNovel = ViewData["LightNovel"] as ProjectPRNLamnthe180410.Models.LightNovel;
+}
+
+<meta charset="UTF-8">
+<meta name="description" content="Anime Template">
+<meta name="keywords" content="Anime, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Read Chapter | @lightNovel?.Title - Chapter @Model.Chapter1</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+<link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="~/css/style.css" type="text/css">
+<style>
+    .chapter-text {
+        font-size: 1.1em;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        color: white;
+    }
+</style>
+
+<!-- Page Preloader -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Chapter Content Begin -->
+<section class="chapter-content spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="section-title">
+                    <h4>@lightNovel?.Title - Chapter @Model.Chapter1</h4>
+                </div>
+                <div class="chapter-text">
+                    @if (!string.IsNullOrEmpty(Model.Description))
+                    {
+                        @Html.Raw(Model.Description)
+                    }
+                    else
+                    {
+                        <p>No content available for this chapter.</p>
+                    }
+                </div>
+                <div class="mt-4">
+                    <!-- Navigation Buttons -->
+                    <div class="chapter-navigation">
+                        @if (Model.Chapter1 > 1)
+                        {
+                            var prevChapter = Model.Chapter1 - 1;
+                            <a href="@Url.Action("Index", "Chapter", new { lightNovelId = Model.LightNovelId, chapterNumber = prevChapter })" class="btn btn-primary mr-2">Previous Chapter</a>
+                        }
+                        <a href="@Url.Action("Index", "Details", new { id = Model.LightNovelId })" class="btn btn-primary">Back to Details</a>
+                        @if (Model.Chapter1 < lightNovel?.Episodes)
+                        {
+                            var nextChapter = Model.Chapter1 + 1;
+                            <a href="@Url.Action("Index", "Chapter", new { lightNovelId = Model.LightNovelId, chapterNumber = nextChapter })" class="btn btn-primary">Next Chapter</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Chapter Content End -->
+<!-- Js Plugins -->
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/player.js"></script>
+<script src="~/js/jquery.nice-select.min.js"></script>
+<script src="~/js/mixitup.min.js"></script>
+<script src="~/js/jquery.slicknav.js"></script>
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="~/js/main.js"></script>
